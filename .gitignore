@@ -1,0 +1,4 @@
+__pycache__/
+*.o
+*.elf
+*.bin
