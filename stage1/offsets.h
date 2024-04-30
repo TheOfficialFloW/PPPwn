@@ -64,8 +64,6 @@
 #define kdlsym_addr_uart_patch 0xffffffff8372cff8
 #define kdlsym_addr_veri_patch 0xffffffff82823f64
 
-#else
-
 #elif FIRMWARE == 1001 // FW 10.01
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
