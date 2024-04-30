@@ -194,17 +194,17 @@ class OffsetsFirmware_1100:
 
 # FW 10.01
 class OffsetsFirmware_1001:
-    PPPOE_SOFTC_LIST = 0xffffffff8446d920 #
+    PPPOE_SOFTC_LIST = 0xffffffff8446d920
 
-    KERNEL_MAP = 0xffffffff8447bef8 # 
+    KERNEL_MAP = 0xffffffff8447bef8
 
-    SETIDT = 0xffffffff8227b460 #
+    SETIDT = 0xffffffff8227b460
 
-    KMEM_ALLOC = 0xffffffff8253b040 #
-    KMEM_ALLOC_PATCH1 = 0xffffffff8253b10c #
-    KMEM_ALLOC_PATCH2 = 0xffffffff8253b114 #
+    KMEM_ALLOC = 0xffffffff8253b040
+    KMEM_ALLOC_PATCH1 = 0xffffffff8253b10c
+    KMEM_ALLOC_PATCH2 = 0xffffffff8253b114
 
-    MEMCPY = 0xffffffff82672d20 #
+    MEMCPY = 0xffffffff82672d20
 
     MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff82376089 # 0F 22 C6 48 F7 C6
 
