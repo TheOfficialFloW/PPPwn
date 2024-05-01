@@ -99,7 +99,7 @@ class OffsetsFirmware_900:
     JMP_R14 = 0xffffffff82b85693
 
 
-# FW 10.00
+# FW 10.00/10.01
 class OffsetsFirmware_1000:
     PPPOE_SOFTC_LIST = 0xffffffff8446d920
 
@@ -113,6 +113,7 @@ class OffsetsFirmware_1000:
 
     MEMCPY = 0xffffffff82672d20
 
+    # mov cr0 rsi ; ud2 ; mov eax 1; ret
     MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff82376089 # 0F 22 C6 48 F7 C6
 
     SECOND_GADGET_OFF = 0x3b # 3? (e.g 3a, 3b, 3c, 3d, 3e..)

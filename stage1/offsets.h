@@ -36,7 +36,7 @@
 #define kdlsym_addr_uart_patch 0xffffffff8372bf60
 #define kdlsym_addr_veri_patch 0xffffffff82826874
 
-#elif FIRMWARE == 1000 // FW 10.00/10.01
+#elif (FIRMWARE == 1000 || FIRMWARE == 1001) // FW 10.00/10.01
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 

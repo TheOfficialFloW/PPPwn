@@ -31,7 +31,7 @@
 #define kdlsym_addr_copyinstr_patch2 0xffffffff82471baf
 #define kdlsym_addr_copyinstr_patch3 0xffffffff82471be0
 
-#elif FIRMWARE == 1000 // FW 10.00/10.01
+#elif (FIRMWARE == 1000 || FIRMWARE == 1001) // FW 10.00/10.01
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 #define kdlsym_addr_printf 0xffffffff822c50f0
