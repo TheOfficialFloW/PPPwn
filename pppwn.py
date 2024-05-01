@@ -838,6 +838,8 @@ def main():
         offs = OffsetsFirmware_900()
     elif args.fw == '1000':
         offs = OffsetsFirmware_1000()
+    elif args.fw == '1001':
+        offs = OffsetsFirmware_1000()
     elif args.fw == '1100':
         offs = OffsetsFirmware_1100()
 
