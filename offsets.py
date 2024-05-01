@@ -18,6 +18,7 @@ class OffsetsFirmware_900:
 
     MEMCPY = 0xffffffff824714b0
 
+    # 0xffffffff823fb949 : mov cr0, rsi ; ud2 ; mov eax, 1 ; ret
     MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff823fb949
 
     SECOND_GADGET_OFF = 0x3d
@@ -150,7 +151,7 @@ class OffsetsFirmware_903:
     POP_RCX_RET = 0xFFFFFFFF822445E7 # 59 C3
 
     # pop r8 ; pop rbp ; ret
-    POP_R8_POP_RBP_RET = 0xFFFFFFFF822AB4DD # 47 58 5D C3
+    POP_R8_POP_RBP_RET = 0xffffffff8237dd7d # C5 FB 11 47 58 5D C3
 
     # pop r12 ; ret
     POP_R12_RET = 0xFFFFFFFF8279D9CF # 41 5C C3
@@ -206,6 +207,7 @@ class OffsetsFirmware_1100:
 
     MEMCPY = 0xffffffff824dddf0
 
+    # 0xffffffff824f1299 : mov cr0, rsi ; ud2 ; mov eax, 1 ; ret
     MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff824f1299
 
     SECOND_GADGET_OFF = 0x3e
