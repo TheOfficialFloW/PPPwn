@@ -151,7 +151,7 @@ class OffsetsFirmware_903:
     POP_RCX_RET = 0xFFFFFFFF822445E7 # 59 C3
 
     # pop r8 ; pop rbp ; ret
-    POP_R8_POP_RBP_RET = 0xffffffff8237dd7d # C5 FB 11 47 58 5D C3
+    POP_R8_POP_RBP_RET = 0xffffffff822ab4da # C5 FB 11 47 58 5D C3
 
     # pop r12 ; ret
     POP_R12_RET = 0xFFFFFFFF8279D9CF # 41 5C C3
