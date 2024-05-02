@@ -100,7 +100,7 @@ class OffsetsFirmware_900:
 
 
 # FW 10.00/10.01
-class OffsetsFirmware_1000:
+class OffsetsFirmware_1000_1001:
     PPPOE_SOFTC_LIST = 0xffffffff8446d920
 
     KERNEL_MAP = 0xffffffff8447bef8
