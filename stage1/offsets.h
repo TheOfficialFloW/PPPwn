@@ -36,7 +36,7 @@
 #define kdlsym_addr_uart_patch 0xffffffff8372bf60
 #define kdlsym_addr_veri_patch 0xffffffff82826874
 
-#elif FIRMWARE == 903 // FW 9.03
+#elif (FIRMWARE == 903 || FIRMWARE == 904) // FW 9.03/9.04
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0 // Identical to 9.00
 

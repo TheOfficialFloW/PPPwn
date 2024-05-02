@@ -99,7 +99,7 @@ class OffsetsFirmware_900:
     JMP_R14 = 0xffffffff82b85693
 
 
-# FW 9.03
+# FW 9.03/9.04
 class OffsetsFirmware_903:
     PPPOE_SOFTC_LIST = 0xffffffff843e99f8
 
@@ -113,84 +113,84 @@ class OffsetsFirmware_903:
     MEMCPY = 0xffffffff82471130
 
     # mov cr0 rsi ; ud2 ; mov eax 1; ret
-    MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xFFFFFFFF823FB679 # 0F 22 C6 48 F7 C6
+    MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff823fb679
 
-    SECOND_GADGET_OFF = 0x3D
+    SECOND_GADGET_OFF = 0x3d
 
     # jmp qword ptr [rsi + 0x3d]
-    FIRST_GADGET = 0xFFFFFFFF829E686F # FF 66 3D 
+    FIRST_GADGET = 0xffffffff829e686f
 
     # push rbp ; jmp qword ptr [rsi]
-    PUSH_RBP_JMP_QWORD_PTR_RSI = 0xFFFFFFFF82C74566 # 55 FF 26
+    PUSH_RBP_JMP_QWORD_PTR_RSI = 0xffffffff82c74566
 
     # pop rbx ; pop r14 ; pop rbp ; jmp qword ptr [rsi + 0x10]
-    POP_RBX_POP_R14_POP_RBP_JMP_QWORD_PTR_RSI_10 = 0xFFFFFFFF822B4151 # 5B 41 5E 5D FF 66 10
+    POP_RBX_POP_R14_POP_RBP_JMP_QWORD_PTR_RSI_10 = 0xffffffff822b4151
 
     # lea rsp, [rsi + 0x20] ; repz ret
-    LEA_RSP_RSI_20_REPZ_RET = 0xFFFFFFFF8293FE06 # 48 8D 66 20 F3 C3
+    LEA_RSP_RSI_20_REPZ_RET = 0xffffffff8293fe06
 
     # add rsp, 0x28 ; pop rbp ; ret
-    ADD_RSP_28_POP_RBP_RET = 0xFFFFFFFF826C31AA # 48 83 C4 28 5D C3
+    ADD_RSP_28_POP_RBP_RET = 0xffffffff826c31aa
 
     # add rsp, 0xb0 ; pop rbp ; ret
-    ADD_RSP_B0_POP_RBP_RET = 0xFFFFFFFF8251AD2F # 48 81 C4 B0 00 00 00 5D C3
+    ADD_RSP_B0_POP_RBP_RET = 0xffffffff8251ad2f
 
     # ret
-    RET = 0xFFFFFFFF822008E0 # C3
+    RET = 0xffffffff822008e0
 
     # pop rdi ; ret
-    POP_RDI_RET = 0xFFFFFFFF8238E75D # 5F C3
+    POP_RDI_RET = 0xffffffff8238e75d
 
     # pop rsi ; ret
-    POP_RSI_RET = 0xFFFFFFFF822AAD39 # 5E C3
+    POP_RSI_RET = 0xffffffff822aad39
 
     # pop rdx ; ret
-    POP_RDX_RET = 0xFFFFFFFF8244CC56 # 5A C3
+    POP_RDX_RET = 0xffffffff8244cc56
 
     # pop rcx ; ret
-    POP_RCX_RET = 0xFFFFFFFF822445E7 # 59 C3
+    POP_RCX_RET = 0xffffffff822445e7
 
     # pop r8 ; pop rbp ; ret
-    POP_R8_POP_RBP_RET = 0xffffffff822ab4dd # 47 58 5D C3
+    POP_R8_POP_RBP_RET = 0xffffffff822ab4dd
 
     # pop r12 ; ret
-    POP_R12_RET = 0xFFFFFFFF8279D9CF # 41 5C C3
+    POP_R12_RET = 0xffffffff8279d9cf
 
     # pop rax ; ret
-    POP_RAX_RET = 0xFFFFFFFF82234EC8 # 58 C3
+    POP_RAX_RET = 0xffffffff82234ec8
 
     # pop rbp ; ret
-    POP_RBP_RET = 0xFFFFFFFF822008DF # 5D C3
+    POP_RBP_RET = 0xffffffff822008df
 
     # push rsp ; pop rsi ; ret
-    PUSH_RSP_POP_RSI_RET = 0xFFFFFFFF82BB479A # 54 5E C3
+    PUSH_RSP_POP_RSI_RET = 0xffffffff82bb479a
 
     # mov rdi, qword ptr [rdi] ; pop rbp ; jmp rax
-    MOV_RDI_QWORD_PTR_RDI_POP_RBP_JMP_RAX = 0xFFFFFFFF82244ED0 # 48 8B 3F 5D FF E0
+    MOV_RDI_QWORD_PTR_RDI_POP_RBP_JMP_RAX = 0xffffffff82244ed0
 
     # mov byte ptr [rcx], al ; ret
-    MOV_BYTE_PTR_RCX_AL_RET = 0xFFFFFFFF825386D8 # 88 01 C3
+    MOV_BYTE_PTR_RCX_AL_RET = 0xffffffff825386d8
 
     # mov rdi, rbx ; call r12
-    MOV_RDI_RBX_CALL_R12 = 0xFFFFFFFF82630B0C # 48 89 DF 41 FF D4
+    MOV_RDI_RBX_CALL_R12 = 0xffffffff82630b0c
 
     # mov rdi, r14 ; call r12
-    MOV_RDI_R14_CALL_R12 = 0xFFFFFFFF8235B337 # 4C 89 F7 41 FF D4
+    MOV_RDI_R14_CALL_R12 = 0xffffffff8235b337
 
     # mov rsi, rbx ; call rax
-    MOV_RSI_RBX_CALL_RAX = 0xFFFFFFFF822E3D2E # 48 89 DE FF D0
+    MOV_RSI_RBX_CALL_RAX = 0xffffffff822e3d2e
 
     # mov r14, rax ; call r8
-    MOV_R14_RAX_CALL_R8 = 0xFFFFFFFF823638C8 # 49 89 C6 41 FF D0
+    MOV_R14_RAX_CALL_R8 = 0xffffffff823638c8
 
     # add rdi, rcx ; ret
-    ADD_RDI_RCX_RET = 0xFFFFFFFF82CB475A # 48 03 F9 C3
+    ADD_RDI_RCX_RET = 0xffffffff82cb475a
 
     # sub rsi, rdx ; mov rax, rsi ; pop rbp ; ret
-    SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET = 0xFFFFFFFF82409287 # 48 29 D6 48 89 F0 5D C3
+    SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET = 0xffffffff82409287
 
     # jmp r14
-    JMP_R14 = 0xFFFFFFFF82B835B3 # 49 FF E6
+    JMP_R14 = 0xffffffff82b835b3
 
 
 # FW 11.00
