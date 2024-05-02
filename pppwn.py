@@ -837,7 +837,7 @@ def main():
     if args.fw == '900':
         offs = OffsetsFirmware_900()
     elif args.fw in ('903', '904'):
-        offs = OffsetsFirmware_903()
+        offs = OffsetsFirmware_903_904()
     elif args.fw == '1100':
         offs = OffsetsFirmware_1100()
 

@@ -100,7 +100,7 @@ class OffsetsFirmware_900:
 
 
 # FW 9.03/9.04
-class OffsetsFirmware_903:
+class OffsetsFirmware_903_904:
     PPPOE_SOFTC_LIST = 0xffffffff843e99f8
 
     KERNEL_MAP = 0xffffffff84464d48
