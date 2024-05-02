@@ -8,7 +8,32 @@
 #ifndef __OFFSETS_H__
 #define __OFFSETS_H__
 
-#if FIRMWARE == 900 // FW 9.00
+
+#if FIRMWARE == 850 // FW 8.50
+
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
+
+#define kdlsym_addr_printf 0xffffffff8235d570
+
+#define kdlsym_addr_sysent 0xffffffff832fc5c0
+
+#define kdlsym_addr_amd_syscall_patch1 0xffffffff82200490 // Identical to 9.00
+#define kdlsym_addr_amd_syscall_patch2 0xffffffff822004b5 // Identical to 9.00
+#define kdlsym_addr_amd_syscall_patch3 0xffffffff822004b9 // Identical to 9.00
+#define kdlsym_addr_amd_syscall_patch4 0xffffffff822004c2 // Identical to 9.00
+
+#define kdlsym_addr_copyin_patch1 0xffffffff825a4337 // ??
+#define kdlsym_addr_copyin_patch2 0xffffffff825a4343 // ??
+
+#define kdlsym_addr_copyout_patch1 0xffffffff825a4242
+#define kdlsym_addr_copyout_patch2 0xffffffff825a424e
+
+#define kdlsym_addr_copyinstr_patch1 0xffffffff825a47e3
+#define kdlsym_addr_copyinstr_patch2 0xffffffff825a47ef
+#define kdlsym_addr_copyinstr_patch3 0xffffffff825a4820
+
+
+#elif FIRMWARE == 900 // FW 9.00
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 
