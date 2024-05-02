@@ -36,6 +36,34 @@
 #define kdlsym_addr_uart_patch 0xffffffff8372bf60
 #define kdlsym_addr_veri_patch 0xffffffff82826874
 
+#elif (FIRMWARE == 1050 || FIRMWARE == 1070 || FIRMWARE == 1071) 
+
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
+
+#define kdlsym_addr_pppoe_softc_list 0xffffffff844514b8
+
+#define kdlsym_addr_cc_cpu 0xffffffff8444e340
+#define kdlsym_addr_callwheelsize 0xffffffff84450340
+
+#define kdlsym_addr_nd6_llinfo_timer 0xffffffff8262dbf0
+
+#define kdlsym_addr_Xill 0xffffffff823b5810
+#define kdlsym_addr_setidt 0xffffffff82341470
+
+#define kdlsym_addr_kernel_map 0xffffffff844a9250
+#define kdlsym_addr_kmem_alloc 0xffffffff82628960
+
+#define kdlsym_addr_kproc_create 0xffffffff825ab490
+#define kdlsym_addr_kproc_exit 0xffffffff825ab700
+
+#define kdlsym_addr_ksock_create 0xffffffff824160e0
+#define kdlsym_addr_ksock_close 0xffffffff82416150
+#define kdlsym_addr_ksock_bind 0xffffffff82416160
+#define kdlsym_addr_ksock_recv 0xffffffff824164c0
+
+#define kdlsym_addr_uart_patch 0xffffffff83c3bca0
+#define kdlsym_addr_veri_patch 0xffffffff82827db4
+
 #elif FIRMWARE == 1100 // FW 11.00
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
