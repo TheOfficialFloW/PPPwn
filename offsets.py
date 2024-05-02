@@ -107,7 +107,7 @@ class OffsetsFirmware_903:
     SETIDT = 0xffffffff825128e0
 
     KMEM_ALLOC = 0xffffffff8257a070
-    KMEM_ALLOC_PATCH1 = 0xffffffff8257a13a
+    KMEM_ALLOC_PATCH1 = 0xffffffff8257a13c
     KMEM_ALLOC_PATCH2 = 0xffffffff8257a144
 
     MEMCPY = 0xffffffff82471130
