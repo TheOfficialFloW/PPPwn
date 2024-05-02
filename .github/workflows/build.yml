@@ -41,4 +41,4 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create "PPPwn ${{ GITHUB.RUN_NUMBER }}" artifact/*.zip --target ${{ GITHUB.SHA }} -t "PPPwn ${{ GITHUB.RUN_NUMBER }}"
+        run: gh release create "PPPwn ${{ GITHUB.RUN_NUMBER }}" dist/*.zip --target ${{ GITHUB.SHA }} -t "PPPwn ${{ GITHUB.RUN_NUMBER }}"
