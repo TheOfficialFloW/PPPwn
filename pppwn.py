@@ -838,10 +838,10 @@ def main():
         offs = OffsetsFirmware_900()
     elif args.fw == '950' or args.fw == '960':
         offs = OffsetsFirmware_950()
-    elif args.fw == '1100':
-        offs = OffsetsFirmware_1100()
     elif args.fw == '1050' or args.fw == '1070' or args.fw == '1071':
         offs = OffsetsFirmware_1050()
+    elif args.fw == '1100':
+        offs = OffsetsFirmware_1100()
 
     exploit = Exploit(offs, args.interface, stage1, stage2)
     exploit.run()
