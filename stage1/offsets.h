@@ -92,6 +92,34 @@
 #define kdlsym_addr_uart_patch 0xffffffff83c3bca0
 #define kdlsym_addr_veri_patch 0xffffffff82827db4
 
+#elif (FIRMWARE == 950 || FIRMWARE == 960) // FW 9.50 / 9.60
+
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
+
+#define kdlsym_addr_pppoe_softc_list 0xffffffff8434c0a8
+
+#define kdlsym_addr_cc_cpu 0xffffffff8441ad60
+#define kdlsym_addr_callwheelsize 0xffffffff8441cd60
+
+#define kdlsym_addr_nd6_llinfo_timer 0xffffffff822044e0
+
+#define kdlsym_addr_Xill 0xffffffff8261fae0
+#define kdlsym_addr_setidt 0xffffffff8254d320
+
+#define kdlsym_addr_kernel_map 0xffffffff84347830
+#define kdlsym_addr_kmem_alloc 0xffffffff823889d0
+
+#define kdlsym_addr_kproc_create 0xffffffff82654e30
+#define kdlsym_addr_kproc_exit 0xffffffff826550a0
+
+#define kdlsym_addr_ksock_create 0xffffffff8261bac0
+#define kdlsym_addr_ksock_close 0xffffffff8261bb30
+#define kdlsym_addr_ksock_bind 0xffffffff8261bb40
+#define kdlsym_addr_ksock_recv 0xffffffff8261bea0
+
+#define kdlsym_addr_uart_patch 0xffffffff83c50be0
+#define kdlsym_addr_veri_patch 0xffffffff82824ae4
+
 #else
 
 #error "Invalid firmware"

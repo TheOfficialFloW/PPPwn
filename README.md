@@ -3,6 +3,7 @@ PPPwn is a kernel remote code execution exploit for PlayStation 4 upto FW 11.00.
 
 Supported versions are:
 - FW 9.00
+- FW 9.50 / 9.60
 - FW 10.50 / 10.70 / 10.71
 - FW 11.00
 - more can be added (PRs are welcome)
