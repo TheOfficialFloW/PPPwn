@@ -34,7 +34,7 @@ jobs:
             make FW=$FW_VERSION clean && make FW=$FW_VERSION all
             make -C stage1 FW=$FW_VERSION clean && make -C stage1 FW=$FW_VERSION
             make -C stage2 FW=$FW_VERSION clean && make -C stage2 FW=$FW_VERSION
-            zip -r "dist/stages-$FW_VERSION-${{ steps.vars.outputs.sha_short }}.zip" stage1/stage1.bin stage2/stage2.bin
+            zip -r "dist/stages-$FW_VERSION.zip" stage1/stage1.bin stage2/stage2.bin
           done
 
       - name: Archive prebuilt binaries
@@ -42,11 +42,11 @@ jobs:
         with:
           name: prebuilt-binaries
           path: dist/*.zip
-          
+
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@master
         with:
-          title: "PPPwn ${{ GITHUB.RUN_NUMBER }}"
+          title: "PPPwn ${{ steps.vars.outputs.sha_short }}"
           automatic_release_tag: "PPPwn-${{ steps.vars.outputs.sha_short }}"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           files: ./dist/*.zip
