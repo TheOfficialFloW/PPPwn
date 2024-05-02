@@ -820,7 +820,7 @@ class Exploit():
 def main():
     parser = ArgumentParser('pppwn.py')
     parser.add_argument('--interface', required=True)
-    parser.add_argument('--fw', choices=['900', '1100'], default='1100')
+    parser.add_argument('--fw', choices=['900', '1100', '1050', '1070', '1071'], default='1100')
     parser.add_argument('--stage1', default='stage1/stage1.bin')
     parser.add_argument('--stage2', default='stage2/stage2.bin')
     args = parser.parse_args()
@@ -836,6 +836,8 @@ def main():
 
     if args.fw == '900':
         offs = OffsetsFirmware_900()
+    elif args.fw in ('1050', '1070', '1071'):
+        offs = OffsetsFirmware_1000()
     elif args.fw == '1100':
         offs = OffsetsFirmware_1100()
 
