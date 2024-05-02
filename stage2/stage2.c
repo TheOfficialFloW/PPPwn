@@ -94,7 +94,24 @@ struct sce_proc *proc_find_by_name(uint8_t *kbase, const char *name) {
   return NULL;
 }
 
+#if USB_LOADER
+static int ksys_read(struct thread *td, int fd, void *buf, size_t nbytes) {
+  int (*sys_read)(struct thread *, struct read_args *) =
+      (void *)sysents[SYS_read].sy_call;
 
+  td->td_retval[0] = 0;
+
+  struct read_args uap;
+  uap.fd = fd;
+  uap.buf = buf;
+  uap.nbyte = nbytes;
+  int error = sys_read(td, &uap);
+  if (error)
+    return -error;
+
+  return td->td_retval[0];
+}
+#endif
 
 int shellui_patch(struct thread *td, uint8_t *kbase)
 {
@@ -365,7 +382,7 @@ void stage2(void) {
   OrbisNotificationRequest notify = {};
   notify.targetId = -1;
   notify.useIconImageUri = 1;
-  memcpy(&notify.message, "PPPwned: Payload Injected successfully", 31);
+  memcpy(&notify.message, "PPPwned: Payload Injected successfully", 40);
 
   struct thread *td = curthread;
   void (*vm_map_lock)(struct vm_map *map) = (void *)(kbase + vm_map_lock_offset);
@@ -385,7 +402,44 @@ void stage2(void) {
   printf("Done.\n");
 #endif
 
-#if 1
+#if USB_PAYLOAD
+
+ void* (*malloc)(unsigned long size, void* type, int flags) = (void*)(kbase + malloc_offset);
+ int fd = ksys_open(td, "/mnt/usb0/payload.bin", O_RDONLY, 0);
+ if (fd < 0)
+     fd = ksys_open(td, "/mnt/usb1/payload.bin", O_RDONLY, 0);
+ if (fd < 0)
+     fd = ksys_open(td, "/mnt/usb2/payload.bin", O_RDONLY, 0);
+ if (fd < 0)
+     fd = ksys_open(td, "/data/payload.bin", O_RDONLY, 0);
+
+if(fd < 0)
+{
+    notify(td, "Failed to open payload.bin from local storage\n");
+    return;
+}
+
+static const int PAYLOAD_SZ = 0x400000;
+
+if((buffer = malloc(PAYLOAD_SZ, M_TEMP, M_WAITOK | M_ZERO)) == NULL)
+{
+    notify(td,"Failed to allocate memory for payload\n");
+    return;
+}
+
+int payload_size = ksys_read(td, fd, buffer, PAYLOAD_SZ);
+if(payload_size <= 0)
+{
+    notify(td,"Failed to read payload\n");
+    free(buffer, M_TEMP);
+    return;
+}
+ksys_close(td, fd);
+printf("payload_size: %d\n", payload_size);
+
+#endif
+
+
 
   printf("Finding SceShellCore process...\n");
 
@@ -410,7 +464,11 @@ void stage2(void) {
   printf("Allocated payload memory @ 0x%016lx\n", PAYLOAD_BASE);
   printf("Writing payload...\n");
   // write the payload
+  #if USB_LOADER
+        r = proc_write_mem(td, kbase, p, (void *)PAYLOAD_BASE, buffer, payload_size, NULL);
+  #else
   r = proc_write_mem(td, kbase, p, (void *)PAYLOAD_BASE, payloadbin_size, payloadbin, NULL);
+  #endif
   if(r) {
       printf("failed to write payload!\n");
       return r;
@@ -424,7 +482,7 @@ void stage2(void) {
       return r;
   }
   printf("Created payload thread!\n");
-#endif
+
 
   int fd;
   fd = ksys_open(td, "/dev/notification0", O_WRONLY, 0);
