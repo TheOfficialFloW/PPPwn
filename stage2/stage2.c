@@ -115,7 +115,7 @@ static int ksys_read(struct thread * td, int fd, void * buf, size_t nbytes) {
   return td -> td_retval[0];
 }
 #endif
-
+#if ENABLE_DEBUG_MENU
 int shellui_patch(struct thread * td, uint8_t * kbase) {
   uint8_t * libkernel_sys_base = NULL,
     * executable_base = NULL,
@@ -311,7 +311,7 @@ int shellcore_fpkg_patch(struct thread * td, uint8_t * kbase) {
 
   return ret;
 }
-
+#endif
 #define SYS_kexec 11
 
 struct sys_kexec_args {
@@ -410,7 +410,7 @@ void stage2(void) {
     (void * )(kbase + vm_map_insert_offset);
   int( * vm_map_unlock)(struct vm_map * map) = (void * )(kbase + vm_map_unlock_offset);
 
-  #if!ENABLE_DEBUG_MENU
+  #if ENABLE_DEBUG_MENU
   printf("Enabling Debug Menu\n");
   shellui_patch(td, kbase);
   shellcore_fpkg_patch(td, kbase);

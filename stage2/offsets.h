@@ -11,7 +11,7 @@
 
 #if FIRMWARE == 900 // FW 9.00
 
-
+#if ENABLE_DEBUG_MENU
 #define enable_data_mount_patch 0x0032079B
 #define enable_fpkg_patch 0x003D7AFF
 #define fake_free_patch 0x00FD3211
@@ -27,7 +27,9 @@
 #define dipsw_libSceDipsw_1 0x00249F7B 
 #define dipsw_libSceDipsw_2 0x00862202 
 #define dipsw_libSceDipsw_3 0x00A27C02 
+#endif
 
+// libkernel_sys.srpx
 #define _scePthreadAttrInit_offset 0x0014190
 #define _scePthreadAttrSetstacksize_offset 0x00141B0
 #define _scePthreadCreate_offset 0x00145D0
@@ -100,6 +102,55 @@
 #define kdlsym_addr_copyinstr_patch1 0xffffffff824de4e3
 #define kdlsym_addr_copyinstr_patch2 0xffffffff824de4ef
 #define kdlsym_addr_copyinstr_patch3 0xffffffff824de520
+
+/*=================== POrt these =======================*/
+
+#if ENABLE_DEBUG_MENU
+#define enable_data_mount_patch 0x0032079B
+#define enable_fpkg_patch 0x003D7AFF
+#define fake_free_patch 0x00FD3211
+#define pkg_installer_patch 0x00A10A81
+#define ext_hdd_patch 0x006180FD
+#define debug_trophies_patch 0x00743299
+
+#define sceKernelIsGenuineCEX 0x0016EAA4
+#define sceKernelIsGenuineCEX_1 0x008621D4
+#define sceKernelIsGenuineCEX_2 0x008AFBC2
+#define sceKernelIsGenuineCEX_3 0x00A27BD4
+#define dipsw_libSceDipsw 0x0016EAD2 
+#define dipsw_libSceDipsw_1 0x00249F7B 
+#define dipsw_libSceDipsw_2 0x00862202 
+#define dipsw_libSceDipsw_3 0x00A27C02 
+#endif
+
+// libkernel_sys.srpx
+#define _scePthreadAttrInit_offset 0
+#define _scePthreadAttrSetstacksize_offset 0
+#define _scePthreadCreate_offset 0
+#define _thr_initial_offset 0
+
+//kern
+#define vm_map_protect_p 0
+#define ptrace_p 0
+#define ptrace_p2 0
+#define disable_aslr_p 0
+#define sceSblACMgrIsAllowedSystemLevelDebugging_p 0
+#define kemem_2 0
+#define kemem_1 0
+#define vm_map_lock_offset 0
+#define vm_map_insert_offset 0
+#define vm_map_unlock_offset 0
+#define malloc_offset 0
+#define free_offset 0
+#define vm_map_lock_read_offset 0
+#define vm_map_unlock_read_offset 0
+#define vm_map_lookup_entry_offset 0
+#define M_TEMP_offset 0 
+#define proc_rmem_offset 0
+#define vm_map_findspace_offset 0
+#define vm_map_delete_offset 0
+#define create_thread_offset 0
+#define all_proc_offset 0
 
 #else
 
