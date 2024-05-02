@@ -99,17 +99,17 @@ class OffsetsFirmware_900:
 
 # FW 10.50
 class OffsetsFirmware_1050:
-    PPPOE_SOFTC_LIST = 
+    PPPOE_SOFTC_LIST = 0xffffffff844514b8
 
-    KERNEL_MAP = 
+    KERNEL_MAP = 0xffffffff844a9250
 
     SETIDT = 0xffffffff823c1685
 
-    KMEM_ALLOC = 
-    KMEM_ALLOC_PATCH1 = 
-    KMEM_ALLOC_PATCH2 = 
+    KMEM_ALLOC = 0xffffffff82628960
+    KMEM_ALLOC_PATCH1 = 0xffffffff82628a2c
+    KMEM_ALLOC_PATCH2 = 0xffffffff82628a34
 
-    MEMCPY = 
+    MEMCPY = 0xffffffff822d7370
 
     MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff82285f39
 
