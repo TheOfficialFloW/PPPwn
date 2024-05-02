@@ -7,8 +7,6 @@
 
 // clang-format off
 #include "proc_utils.h"
-#include "offsets.h"
-
 
 extern uint8_t payloadbin[];
 extern int32_t payloadbin_size;
@@ -76,32 +74,16 @@ static int ksys_close(struct thread *td, int fd) {
   return td->td_retval[0];
 }
 
-static int ksys_read(struct thread *td, int fd, void *buf, size_t nbytes) {
-  int (*sys_read)(struct thread *, struct read_args *) =
-      (void *)sysents[SYS_read].sy_call;
-
-  td->td_retval[0] = 0;
-
-  struct read_args uap;
-  uap.fd = fd;
-  uap.buf = buf;
-  uap.nbyte = nbytes;
-  int error = sys_read(td, &uap);
-  if (error)
-    return -error;
-
-  return td->td_retval[0];
-}
-
 struct sce_proc *proc_find_by_name(uint8_t *kbase, const char *name) {
   struct sce_proc *p;
+  int (*printf)(const char *format, ...) = (void*)(kbase+0x000B7A30);
 
   if (!name) {
     return NULL;
   }
   //printf("after name\n");
 
-  p = *(struct proclist **)(kbase + all_proc_offset);
+  p = *(struct proclist **)(kbase + 0x01B946E0);
   do {
    // printf("p->p_comm: %s\n", p->p_comm);
     if (!memcmp(p->p_comm, name, strlen(name))) {
@@ -121,10 +103,9 @@ int shellui_patch(struct thread *td, uint8_t *kbase)
             *app_base = NULL;
 
 	size_t n;
-        void* M_TEMP = (void*)(kbase + M_TEMP_offset);
-  uint64_t kaslr_offset = rdmsr(MSR_LSTAR) - kdlsym_addr_Xfast_syscall;
-    void (*free)(void *ptr, int type) = (void *)(kbase + free_offset);
-  int (*printf)(const char *format, ...) = (void *)kdlsym(printf);
+        void* M_TEMP = (void*)(kbase + 0x015621E0);
+    void (*free)(void *ptr, int type) = (void *)(kbase + 0x00301CE0);
+    int (*printf)(const char *format, ...) = (void*)(kbase+0x000B7A30);
 
 	struct proc_vm_map_entry *entries = NULL;
 	size_t num_entries = 0;
@@ -211,25 +192,22 @@ int shellcore_fpkg_patch(struct thread *td, uint8_t *kbase)
 
 	int ret = 0;
 
-
-
 	uint32_t call_ofs_for__xor__eax_eax__3nop[] = {
 		// call sceKernelIsGenuineCEX
-		sceKernelIsGenuineCEX, 
-		sceKernelIsGenuineCEX_1,
-		sceKernelIsGenuineCEX_2,
-		sceKernelIsGenuineCEX_3,
+		0x0016EAA4, 
+		0x008621D4,
+		0x008AFBC2,
+		0x00A27BD4,
 		// call nidf_libSceDipsw
-		dipsw_libSceDipsw,
-		dipsw_libSceDipsw_1,
-		dipsw_libSceDipsw_2,
-		dipsw_libSceDipsw_3,
+		0x00A27BD4,
+		0x00A27BD4,
+		0x00862202,
+		0x00A27C02,
 	};
 
-  void* M_TEMP = (void*)(kbase + M_TEMP_offset);
-  void (*free)(void *ptr, int type) = (void *)(kbase + free_offset);
-   uint64_t kaslr_offset = rdmsr(MSR_LSTAR) - kdlsym_addr_Xfast_syscall;
-   int (*printf)(const char *format, ...) = (void *)kdlsym(printf);
+  void* M_TEMP = (void*)(kbase + 0x015621E0);
+  void (*free)(void *ptr, int type) = (void *)(kbase + 0x00301CE0);
+  int (*printf)(const char *format, ...) = (void*)(kbase+0x000B7A30);
 
 	uint8_t xor__eax_eax__inc__eax[5] = { 0x31, 0xC0, 0xFF, 0xC0, 0x90 };
 
@@ -264,35 +242,32 @@ int shellcore_fpkg_patch(struct thread *td, uint8_t *kbase)
 			goto error;
 	}
 
-	ret = proc_write_mem(td, kbase, ssc, text_seg_base + enable_data_mount_patch, sizeof(xor__eax_eax__inc__eax), xor__eax_eax__inc__eax, &n);
+	ret = proc_write_mem(td, kbase, ssc, text_seg_base + 0x0032079B /*enable_data_mount_patch*/, sizeof(xor__eax_eax__inc__eax), xor__eax_eax__inc__eax, &n);
 	if (ret) 
 		goto error;
 
-  
-  
 	// enable fpkg for patches
-	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + enable_fpkg_patch), 8, "\xE9\x96\x00\x00\x00\x90\x90\x90", &n);
+	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + 0x003D7AFF /*enable_fpkg_patch*/), 8, "\xE9\x96\x00\x00\x00\x90\x90\x90", &n);
 	if (ret)
 		goto error;
 
-
 	// this offset corresponds to "fake\0" string in the Shellcore's memory
-	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + fake_free_patch), 5, "free\0", &n);
+	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + 0x00FD3211 /*fake_free_patch*/), 5, "free\0", &n);
 	if (ret)
 		goto error;
 
 	// make pkgs installer working with external hdd
-	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + pkg_installer_patch), 1, "\0", &n);
+	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + 0x00A10A81 /*pkg_installer_patch*/), 1, "\0", &n);
 	if (ret)
 		goto error;
 
 	// enable support with 6.xx external hdd
-	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + ext_hdd_patch), 1, "\xEB", &n);
+	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + 0x006180FD /*ext_hdd_patch*/), 1, "\xEB", &n);
 	if (ret)
 		goto error;
 
 	// enable debug trophies on retail
-	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + debug_trophies_patch), 5, "\x31\xc0\x90\x90\x90", &n);
+	ret = proc_write_mem(td, kbase, ssc, (void *)(text_seg_base + 0x00743299/*debug_trophies_patch*/), 5, "\x31\xc0\x90\x90\x90", &n);
 	if (ret)
 	{
 		goto error;
@@ -305,9 +280,6 @@ error:
 	return ret;
 }
 
-/*
-* https://gist.github.com/TheOfficialFloW/77eaf8c0d87a0d7c24d8e108c2dbccdf
-*/
 #define SYS_kexec 11
 
 struct sys_kexec_args {
@@ -319,29 +291,6 @@ static int sys_kexec(struct thread *td, struct sys_kexec_args *uap) {
   return uap->fptr(uap->arg);
 
 }
-
-void notify(struct thread* td, const char *msg)
-{
-    OrbisNotificationRequest notify = {};
-    notify.targetId = -1;
-    notify.useIconImageUri = 1;
-    memcpy(&notify.message, msg, strlen(msg));
-    int  fd = ksys_open(td, "/dev/notification0", O_WRONLY, 0);
-     if (!fd)
-          fd = ksys_open(td, "/dev/notification0", O_WRONLY | O_NONBLOCK, 0);
-     if (!fd)
-          fd = ksys_open(td, "/dev/notification1", O_WRONLY, 0);
-     if (!fd)
-          fd = ksys_open(td, "/dev/notification1", O_WRONLY | O_NONBLOCK, 0);
-
-
-
-    if (fd) {
-        ksys_write(td, fd, &notify, sizeof(notify));
-        ksys_close(td, fd);
-    }
-}
-  
 
 
 void stage2(void) {
@@ -358,63 +307,67 @@ void stage2(void) {
   uint64_t cr0 = rcr0();
   load_cr0(cr0 & ~CR0_WP);
 
-  // Allow syscalls everywhere
-  *(uint32_t *)kdlsym(amd_syscall_patch1) = 0;
-  *(uint16_t *)kdlsym(amd_syscall_patch2) = 0x9090;
-  *(uint16_t *)kdlsym(amd_syscall_patch3) = 0x9090;
-  *(uint8_t *)kdlsym(amd_syscall_patch4) = 0xeb;
 
-  // Allow user and kernel addresses
-  uint8_t nops[] = {0x90, 0x90, 0x90};
+	// Allow syscalls everywhere
+	*(uint32_t*)kdlsym(amd_syscall_patch1) = 0;
+	*(uint16_t*)kdlsym(amd_syscall_patch2) = 0x9090;
+	*(uint16_t*)kdlsym(amd_syscall_patch3) = 0x9090;
+	*(uint8_t*)kdlsym(amd_syscall_patch4) = 0xeb;
 
-  *(uint16_t *)kdlsym(copyin_patch1) = 0x9090;
-  memcpy((void *)kdlsym(copyin_patch2), nops, sizeof(nops));
+	// Allow user and kernel addresses
+	uint8_t nops[] = { 0x90, 0x90, 0x90 };
 
-  *(uint16_t *)kdlsym(copyout_patch1) = 0x9090;
-  memcpy((void *)kdlsym(copyout_patch2), nops, sizeof(nops));
+	*(uint16_t*)kdlsym(copyin_patch1) = 0x9090;
+	memcpy((void*)kdlsym(copyin_patch2), nops, sizeof(nops));
 
-  *(uint16_t *)kdlsym(copyinstr_patch1) = 0x9090;
-  memcpy((void *)kdlsym(copyinstr_patch2), nops, sizeof(nops));
-  *(uint16_t *)kdlsym(copyinstr_patch3) = 0x9090;
+	*(uint16_t*)kdlsym(copyout_patch1) = 0x9090;
+	memcpy((void*)kdlsym(copyout_patch2), nops, sizeof(nops));
 
-  printf("Patching vm_map_protect, ptrace, ASLR and kmem_alloc\n");
+	*(uint16_t*)kdlsym(copyinstr_patch1) = 0x9090;
+	memcpy((void*)kdlsym(copyinstr_patch2), nops, sizeof(nops));
+	*(uint16_t*)kdlsym(copyinstr_patch3) = 0x9090;
 
-  // patch vm_map_protect check
+	printf("Patching vm_map_protect, ptrace, ASLR and kmem_alloc\n");
 
-  memcpy((void *)(kbase + vm_map_protect_p), "\x90\x90\x90\x90\x90\x90", 6);
+	// patch vm_map_protect check
 
-    // patch memcpy first
-    *(uint8_t *)(kbase + 0x002714BD) = 0xEB; //900
+	memcpy((void*)(kbase + vm_map_protect_p), "\x90\x90\x90\x90\x90\x90", 6);
 
-  // patch ptrace
-  *(uint8_t *)(kbase + ptrace_p) = 0xEB;
-  memcpy((void *)(kbase + ptrace_p2), "\xE9\x7C\x02\x00\x00", 5);
 
-  // patch sceSblACMgrIsAllowedSystemLevelDebugging
-  
-  memcpy((void *)(kbase + sceSblACMgrIsAllowedSystemLevelDebugging_p), "\x48\xC7\xC0\x01\x00\x00\x00\xC3", 8); //900
+	// patch ptrace
+	*(uint8_t*)(kbase + ptrace_p) = 0xEB;
+	memcpy((void*)(kbase + ptrace_p2), "\xE9\x7C\x02\x00\x00", 5);
 
-  // patch ASLR, thanks 2much4u
-  *(uint16_t *)(kbase + disable_aslr_p) = 0x9090;
+	// patch sceSblACMgrIsAllowedSystemLevelDebugging
 
-  // patch kmem_alloc
-  *(uint8_t *)(kbase + kemem_1) = VM_PROT_ALL;
-  *(uint8_t *)(kbase + kemem_2) = VM_PROT_ALL;
+	memcpy((void*)(kbase + sceSblACMgrIsAllowedSystemLevelDebugging_p), "\x48\xC7\xC0\x01\x00\x00\x00\xC3", 8); //900
 
-   // Install kexec syscall 11
-  struct sysent *sys = &sysents[SYS_kexec];
-  sys->sy_narg = 2;
-  sys->sy_call = (void *)sys_kexec;
-  sys->sy_thrcnt = 1;
+	// patch ASLR, thanks 2much4u
+	*(uint16_t*)(kbase + disable_aslr_p) = 0x9090;
 
-  printf("kexec added\n");
+	// patch kmem_alloc
+	*(uint8_t*)(kbase + kemem_1) = VM_PROT_ALL;
+	*(uint8_t*)(kbase + kemem_2) = VM_PROT_ALL;
+
+	// Install kexec syscall 11
+	struct sysent* sys = &sysents[SYS_kexec];
+	sys->sy_narg = 2;
+	sys->sy_call = (void*)sys_kexec;
+	sys->sy_thrcnt = 1;
+
+	printf("kexec added\n");
 
 
   // Restore write protection
   load_cr0(cr0);
 
-  struct thread *td = curthread;
+  // Send notification
+  OrbisNotificationRequest notify = {};
+  notify.targetId = -1;
+  notify.useIconImageUri = 1;
+  memcpy(&notify.message, "PPPwned: Payload Injected successfully", 31);
 
+  struct thread *td = curthread;
   void (*vm_map_lock)(struct vm_map *map) = (void *)(kbase + vm_map_lock_offset);
   struct vmspace *vm;
   struct vm_map *map;
@@ -423,10 +376,7 @@ void stage2(void) {
                        vm_ooffset_t offset, vm_offset_t start, vm_offset_t end,
                        vm_prot_t prot, vm_prot_t max, int cow) =
       (void *)(kbase + vm_map_insert_offset);
- int (*vm_map_unlock)(struct vm_map *map) = (void *)(kbase + vm_map_unlock_offset);
-void* (*malloc)(unsigned long size, void* type, int flags) = (void*)(kbase + malloc_offset);
-void* M_TEMP = (void*)(kbase + M_TEMP_offset);
-void (*free)(void *ptr, int type) = (void *)(kbase + free_offset);
+  int (*vm_map_unlock)(struct vm_map *map) = (void *)(kbase + vm_map_unlock_offset);
 
 #if !ENABLE_DEBUG_MENU
   printf("Enabling Debug Menu\n");
@@ -435,48 +385,16 @@ void (*free)(void *ptr, int type) = (void *)(kbase + free_offset);
   printf("Done.\n");
 #endif
 
+#if 1
 
+  printf("Finding SceShellCore process...\n");
 
-#if USB_PAYLOAD
-
- int fd = ksys_open(td, "/mnt/usb0/payload.bin", O_RDONLY, 0);
- if (fd < 0)
-     fd = ksys_open(td, "/mnt/usb1/payload.bin", O_RDONLY, 0);
- if (fd < 0)
-     fd = ksys_open(td, "/mnt/usb2/payload.bin", O_RDONLY, 0);
- if (fd < 0)
-     fd = ksys_open(td, "/data/payload.bin", O_RDONLY, 0);
-
-if(fd < 0)
-{
-    notify(td, "Failed to open payload.bin from local storage\n");
+  struct sce_proc *p = proc_find_by_name(kbase, "SceShellCore");
+  if (!p) {
+    printf("could not find SceShellCore process!\n");
     return;
-}
-
-char buffer[0x4000];
-/*
-* make bugger buffer for larger payloads
-*/
-
-int payload_size = ksys_read(td, fd, &buffer[0], 0x4000);
-if(payload_size <= 0)
-{
-    notify(td,"Failed to read payload\n");
-    free(buffer, M_TEMP);
-    return;
-}
-ksys_close(td, fd);
-printf("payload_size: %d\n", payload_size);
-#endif
-
-printf("Finding SceShellCore process...\n");
-
-struct sce_proc *p = proc_find_by_name(kbase, "SceShellCore");
-if (!p) {
-    notify(td,"could not find SceShellCore process!\n");
-    return;
-}
- printf("Found SceShellCore process @ PID %d\n", p->pid);
+  }
+  printf("Found SceShellCore process @ PID %d\n", p->pid);
   
   vm = p->p_vmspace;
   map = &vm->vm_map;
@@ -486,19 +404,15 @@ if (!p) {
   r = vm_map_insert(map, NULL, NULL, PAYLOAD_BASE, PAYLOAD_BASE + 0x400000,  VM_PROT_ALL, VM_PROT_ALL, 0);
   vm_map_unlock(map);
   if (r) {
-    notify(td,"failed to allocate payload memory!\n");
+    printf("failed to allocate payload memory!\n");
     return r;
   }
   printf("Allocated payload memory @ 0x%016lx\n", PAYLOAD_BASE);
   printf("Writing payload...\n");
   // write the payload
-#if 0
-  r = proc_write_mem(td, kbase, p, (void *)PAYLOAD_BASE, buffer, payload_size, NULL);
-#else
-  r = proc_write_mem(td, kbase, p, (void *)PAYLOAD_BASE, payloadbin, payloadbin_size, NULL);
-#endif
+  r = proc_write_mem(td, kbase, p, (void *)PAYLOAD_BASE, payloadbin_size, payloadbin, NULL);
   if(r) {
-      notify(td,"failed to write payload!\n");
+      printf("failed to write payload!\n");
       return r;
   }
   printf("Wrote payload!\n");
@@ -506,12 +420,24 @@ if (!p) {
     // create a thread
   r= proc_create_thread(td, kbase, p, PAYLOAD_BASE);
   if(r) {
-      notify(td,"failed to create payload thread!\n");
+      printf("failed to create payload thread!\n");
       return r;
   }
   printf("Created payload thread!\n");
-  notify(td,"Payload injected successfully\n");
+#endif
 
+  int fd;
+  fd = ksys_open(td, "/dev/notification0", O_WRONLY, 0);
+  if (!fd)
+    fd = ksys_open(td, "/dev/notification0", O_WRONLY | O_NONBLOCK, 0);
+  if (!fd)
+    fd = ksys_open(td, "/dev/notification1", O_WRONLY, 0);
+  if (!fd)
+    fd = ksys_open(td, "/dev/notification1", O_WRONLY | O_NONBLOCK, 0);
 
+  if (fd) {
+    ksys_write(td, fd, &notify, sizeof(notify));
+    ksys_close(td, fd);
+  }
 }
 

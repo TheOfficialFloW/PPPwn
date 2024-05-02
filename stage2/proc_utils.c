@@ -90,6 +90,8 @@ int proc_rw_mem(struct thread *td, uint8_t *kbase, struct proc *p, void *ptr, ui
     
     int r = 0;
     int (*proc_rwmem)(struct proc *p, struct uio *uio) = (void *)(kbase + proc_rmem_offset);
+        uint64_t kaslr_offset = rdmsr(MSR_LSTAR) - kdlsym_addr_Xfast_syscall;
+    int (*printf)(const char *format, ...) = (void *)kdlsym(printf);
 
     if (!p) {
         return 1;
@@ -115,7 +117,8 @@ int proc_rw_mem(struct thread *td, uint8_t *kbase, struct proc *p, void *ptr, ui
     uio.uio_segflg = UIO_SYSSPACE;
     uio.uio_rw = write ? UIO_WRITE : UIO_READ;
     uio.uio_td = td;
-
+    
+    printf("proc_rw_mem: uio.uio_resid: %d\n", uio.uio_resid);
     r = proc_rwmem(p, &uio);
 
     if (n) {

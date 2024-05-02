@@ -20,6 +20,7 @@ The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to
 ## Stage2 PoC payload loader
 - default loads the embedded payload in the stage 2 folder
 - has code for loading payloads from a USB (WIP)
+- Big thanks to ps4debug for the utils
 
 ## Usage
 
