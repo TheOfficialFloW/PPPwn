@@ -2,23 +2,6 @@
 #include "elf.h"
 #include "offsets.h"
 
-int sys_kern_rw(struct thread *td, struct sys_kern_rw_args *uap) {
-  if (uap->write) {
-    // Disable write protection
-    uint64_t cr0 = rcr0();
-    load_cr0(cr0 & ~CR0_WP);
-    memcpy((void *)uap->address, uap->data, uap->length);
-    // Restore write protection
-    load_cr0(cr0);
-  } else {
-    memcpy(uap->data, (void *)uap->address, uap->length);
-  }
-
-  td->td_retval[0] = 0;
-  return 0;
-}
-
-
 int proc_get_vm_map(struct thread *td, uint8_t *kbase, struct proc *p, struct proc_vm_map_entry **entries, uint64_t *num_entries) {
     struct proc_vm_map_entry *info = NULL;
     struct vm_map_entry *entry = NULL;
@@ -90,8 +73,13 @@ int proc_rw_mem(struct thread *td, uint8_t *kbase, struct proc *p, void *ptr, ui
     
     int r = 0;
     int (*proc_rwmem)(struct proc *p, struct uio *uio) = (void *)(kbase + proc_rmem_offset);
-        uint64_t kaslr_offset = rdmsr(MSR_LSTAR) - kdlsym_addr_Xfast_syscall;
+    uint64_t kaslr_offset = rdmsr(MSR_LSTAR) - kdlsym_addr_Xfast_syscall;
     int (*printf)(const char *format, ...) = (void *)kdlsym(printf);
+
+    if(size >= 0x400000){
+        printf("Size %d too big\n", size);
+        return 1;
+    }
 
     if (!p) {
         return 1;
@@ -117,7 +105,7 @@ int proc_rw_mem(struct thread *td, uint8_t *kbase, struct proc *p, void *ptr, ui
     uio.uio_segflg = UIO_SYSSPACE;
     uio.uio_rw = write ? UIO_WRITE : UIO_READ;
     uio.uio_td = td;
-    
+
     printf("proc_rw_mem: uio.uio_resid: %d\n", uio.uio_resid);
     r = proc_rwmem(p, &uio);
 
@@ -187,7 +175,7 @@ int proc_deallocate(struct thread* td, uint8_t* kbase,struct proc *p, void *addr
     void (*vm_map_lock)(struct vm_map *map) = (void *)(kbase + vm_map_lock_offset);
     int (*vm_map_unlock)(struct vm_map *map) = (void *)(kbase + vm_map_unlock_offset);
    
-    int(*vm_map_delete)(struct vm_map *map, uint64_t start, uint64_t end) = (void *)(kbase + 0x0007E680);
+    int(*vm_map_delete)(struct vm_map *map, uint64_t start, uint64_t end) = (void *)(kbase + vm_map_delete_offset);
 
     struct vmspace *vm = p->p_vmspace;
     struct vm_map *map = &vm->vm_map;
@@ -254,52 +242,17 @@ int proc_create_thread(struct thread *td, uint8_t *kbase, struct proc *p, uint64
 
     // offsets are for 9.00 libraries
 
-// libkernel.sprx
-//scePthreadAttrInit = 0x0013660
-//scePthreadAttrSetstacksize = 0x00013680
-//scePthreadCreate = 0x00013AA0
-//thr_initial = 0x8E430
- 
-// libkernel_web.sprx
-//scePthreadAttrInit = 0x000087F0
-//scePthreadAttrSetstacksize = 0x0001A580
-//scePthreadCreate = 0x00204C0
-//thr_initial = 0x8E430
- 
-// libkernel_sys.sprx
-//scePthreadAttrInit = 0x0014190
-//scePthreadAttrSetstacksize = 0x0141B0
-//scePthreadCreate = 0x00145D0
-//thr_initial = 0x8E830
-
     uint64_t _scePthreadAttrInit = 0, _scePthreadAttrSetstacksize = 0, _scePthreadCreate = 0, _thr_initial = 0;
     for (int i = 0; i < num_entries; i++) {
         if (entries[i].prot != (PROT_READ | PROT_EXEC)) {
             continue;
         }
 
-        if (!memcmp(entries[i].name, "libkernel.sprx", 14)) {
-            _scePthreadAttrInit = entries[i].start + 0x0013660;
-            _scePthreadAttrSetstacksize = entries[i].start + 0x00013680;
-            _scePthreadCreate = entries[i].start + 0x00013AA0;
-            _thr_initial = entries[i].start + 0x8E430;
-            printf("libkernel.sprx found\n");
-            break;
-        }
-        if (!memcmp(entries[i].name, "libkernel_web.sprx", 18))
-        {
-            _scePthreadAttrInit = entries[i].start + 0x000087F0;
-            _scePthreadAttrSetstacksize = entries[i].start + 0x0001A580;
-            _scePthreadCreate = entries[i].start + 0x00204C0;
-            _thr_initial = entries[i].start + 0x8E430;
-            printf("libkernel_web.sprx found\n");
-            break;
-        }
         if (!memcmp(entries[i].name, "libkernel_sys.sprx", 18)) {
-            _scePthreadAttrInit = entries[i].start + 0x0014190;
-            _scePthreadAttrSetstacksize = entries[i].start + 0x0141B0;
-            _scePthreadCreate = entries[i].start + 0x00145D0;
-            _thr_initial = entries[i].start + 0x8E830;
+            _scePthreadAttrInit = entries[i].start + _scePthreadAttrInit_offset;
+            _scePthreadAttrSetstacksize = entries[i].start + _scePthreadAttrSetstacksize_offset;
+            _scePthreadCreate = entries[i].start + _scePthreadCreate_offset;
+            _thr_initial = entries[i].start + _thr_initial_offset;
             printf("libkernel_sys.sprx found\n");
             break;
         }

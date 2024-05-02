@@ -28,6 +28,11 @@
 #define dipsw_libSceDipsw_2 0x00862202 
 #define dipsw_libSceDipsw_3 0x00A27C02 
 
+#define _scePthreadAttrInit_offset 0x0014190
+#define _scePthreadAttrSetstacksize_offset 0x00141B0
+#define _scePthreadCreate_offset 0x00145D0
+#define _thr_initial_offset 0x8E830
+
 //kern
 #define vm_map_protect_p 0x00080B8B
 #define ptrace_p 0x41F4E5

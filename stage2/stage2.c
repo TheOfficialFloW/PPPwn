@@ -11,6 +11,8 @@
 extern uint8_t payloadbin[];
 extern int32_t payloadbin_size;
 
+
+
 int memcmp(const void * str1,
   const void * str2, size_t count) {
   const unsigned char * s1 = (const unsigned char * ) str1;
@@ -94,7 +96,7 @@ struct sce_proc * proc_find_by_name(uint8_t * kbase,
 
   return NULL;
 }
-
+#define USB_LOADER 1
 #if USB_LOADER
 static int ksys_read(struct thread * td, int fd, void * buf, size_t nbytes) {
   int( * sys_read)(struct thread * , struct read_args * ) =
@@ -414,11 +416,14 @@ void stage2(void) {
   shellcore_fpkg_patch(td, kbase);
   printf("Done.\n");
   #endif
+  int fd;
 
-  #if USB_PAYLOAD
-
+  #if USB_LOADER
+ void* buffer = NULL;
+ void (*free)(void * ptr, int type) = (void *)(kbase + free_offset);
+ void* M_TEMP = (void *)(kbase + M_TEMP_offset);
   void * ( * malloc)(unsigned long size, void * type, int flags) = (void * )(kbase + malloc_offset);
-  int fd = ksys_open(td, "/mnt/usb0/payload.bin", O_RDONLY, 0);
+  fd = ksys_open(td, "/mnt/usb0/payload.bin", O_RDONLY, 0);
   if (fd < 0)
     fd = ksys_open(td, "/mnt/usb1/payload.bin", O_RDONLY, 0);
   if (fd < 0)
@@ -427,21 +432,21 @@ void stage2(void) {
     fd = ksys_open(td, "/data/payload.bin", O_RDONLY, 0);
 
   if (fd < 0) {
-    notify(td, "Failed to open payload.bin from local storage\n");
+    printf( "Failed to open payload.bin from local storage\n");
     return;
   }
 
   static
   const int PAYLOAD_SZ = 0x400000;
 
-  if ((buffer = malloc(PAYLOAD_SZ, M_TEMP, M_WAITOK | M_ZERO)) == NULL) {
-    notify(td, "Failed to allocate memory for payload\n");
+  if ((buffer = malloc(PAYLOAD_SZ, M_TEMP, 0)) == NULL) {
+   printf(  "Failed to allocate memory for payload\n");
     return;
   }
 
   int payload_size = ksys_read(td, fd, buffer, PAYLOAD_SZ);
   if (payload_size <= 0) {
-    notify(td, "Failed to read payload\n");
+    printf(  "Failed to read payload\n");
     free(buffer, M_TEMP);
     return;
   }
@@ -474,7 +479,33 @@ void stage2(void) {
   printf("Writing payload...\n");
   // write the payload
   #if USB_LOADER
-  r = proc_write_mem(td, kbase, p, (void * ) PAYLOAD_BASE, buffer, payload_size, NULL);
+ // r = proc_write_mem(td, kbase, p, (void * ) PAYLOAD_BASE, buffer, payload_size, NULL);
+  struct iovec iov;
+    struct uio uio;
+    
+    int (*proc_rwmem)(struct proc *p, struct uio *uio) = (void *)(kbase + proc_rmem_offset);
+
+    if(payload_size >= 0x400000){
+        printf("Size %d too big\n", payload_size);
+        return 1;
+    }
+
+    memset(&iov, NULL, sizeof(iov));
+    iov.iov_base = (uint64_t)buffer;
+    iov.iov_len = payload_size;
+
+    memset(&uio, NULL, sizeof(uio));
+    uio.uio_iov = (uint64_t)&iov;
+    uio.uio_iovcnt = 1;
+    uio.uio_offset = (uint64_t)PAYLOAD_BASE;
+    uio.uio_resid = payload_size;
+    uio.uio_segflg = UIO_SYSSPACE;
+    uio.uio_rw =  UIO_WRITE;
+    uio.uio_td = td;
+
+    printf("proc_rw_mem: uio.uio_resid: %d\n", uio.uio_resid);
+    r = proc_rwmem(p, &uio);
+    
   #else
   r = proc_write_mem(td, kbase, p, (void * ) PAYLOAD_BASE, payloadbin_size, payloadbin, NULL);
   #endif
@@ -492,7 +523,7 @@ void stage2(void) {
   }
   printf("Created payload thread!\n");
 
-  int fd;
+
   fd = ksys_open(td, "/dev/notification0", O_WRONLY, 0);
   if (!fd)
     fd = ksys_open(td, "/dev/notification0", O_WRONLY | O_NONBLOCK, 0);
