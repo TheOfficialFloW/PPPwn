@@ -1,0 +1,906 @@
+Archive member included to satisfy reference by file (symbol)
+
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+                              build/dump.o (read)
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+                              build/main.o (initSysUtil)
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(memory.o)
+                              build/dump.o (mmap)
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(debug.o)
+                              build/main.o (DEBUG_SOCK)
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+                              build/main.o (initLibc)
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+                              build/main.o (getFunctionAddressByName)
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+                              build/main.o (initNetwork)
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+                              build/ftps4.o (scePthreadCreate)
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+                              build/main.o (initKernel)
+/home/lm/ps4-payload-sdk/libPS4/libPS4.a(syscall.o)
+                              build/main.o (syscall)
+
+Merging program properties
+
+Removed property 0xc0000002 to merge build/debug.o (0x3) and /tmp/ccc6XsCg.o (not found)
+Removed property 0xc0000002 to merge build/debug.o (not found) and build/dump.o (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and build/ftps4.o (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and build/main.o (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o) (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o) (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and /home/lm/ps4-payload-sdk/libPS4/libPS4.a(memory.o) (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and /home/lm/ps4-payload-sdk/libPS4/libPS4.a(debug.o) (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o) (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o) (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o) (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o) (0x3)
+Removed property 0xc0000002 to merge build/debug.o (not found) and /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o) (0x3)
+
+Allocating common symbols
+Common symbol       size              file
+
+scePthreadMutexDestroy
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+strcpy              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+asctime             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+scePthreadCancel    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+scePthreadMutexTrylock
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+libc                0x4               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelGettimeofday
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceSysmoduleLoadModule
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+getgid              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceUserServiceInitialize
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+strerror            0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+scePthreadDetach    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+memmove             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+snprintf            0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+scePthreadSelf      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+strncpy_s           0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+libKernelHandle     0x4               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+__stack_chk_guard   0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceKernelGetDirectMemorySize
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+ceil                0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetCtlInit       0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+sceNetHtonll        0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+execve              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+getpid              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceNetNtohll        0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+sceKernelSleep      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+memcpy              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelGetCurrentCpu
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceNetCtlGetInfo    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+seekdir             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelDeleteEqueue
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceKernelGetCpuTemperature
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+getuid              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+rewinddir           0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+malloc              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetInetNtop      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+libModule           0x4               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+libPthread          0x4               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+readdir_r           0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetSocket        0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+getprogname         0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+readdir             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceSysUtilSendSystemNotificationWithText
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+sceUserServiceGetInitialUser
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+sceNetInetPton      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+__stack_chk_fail    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceKernelMapDirectMemory
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+strtol              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+snprintf_s          0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sysarch             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+strrchr             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+calloc              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+rindex              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetGetsockname   0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+sceKernelError      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+atof                0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetHtons         0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+_Getpctype          0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sysctl              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+fprintf             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+ctime               0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelRead       0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+strcat              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetSend          0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+scePthreadExit      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+setregid            0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+scePthreadYield     0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+fseek               0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+libSceUserService   0x4               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+mktime              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+strstr              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+scePthreadMutexInit
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+__error             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+rand                0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelSendNotificationRequest
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceNetHtonl         0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+setgid              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+dirfd               0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetErrnoLoc      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+sceKernelLseek      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceKernelStat       0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+strlcpy             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+strncmp             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelLoadStartModule
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceSystemServiceLaunchWebBrowser
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+strncpy             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+realloc             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelGetSystemSwVersion
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+bcopy               0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+strtok              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+memcmp              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelClose      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sscanf              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceUserServiceGetUserName
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+strncat             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+memmove_s           0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+fread               0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+_Stoul              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+pthread_setaffinity_np
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+strdup              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetSetsockopt    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+index               0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+libSceSystemService
+                    0x4               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+sceNetSocketClose   0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+fopen               0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelGetProcessTime
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+asctime_r           0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+setreuid            0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+localtime           0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+memset              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+scePthreadMutexUnlock
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ftell               0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+srand               0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+fclose              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelAllocateDirectMemory
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+time                0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+opendir             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+strcmp              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetRecv          0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+sceUserServiceGetLoginUserIdList
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+gmtime_s            0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetBind          0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+memalign            0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sprintf             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+libNetCtl           0x4               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+sceNetConnect       0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+sceNetNtohs         0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ctime_r             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelUsleep     0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceNetCtlTerm       0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+scePthreadMutexTimedlock
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+sceKernelAddUserEvent
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+scePthreadJoin      0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+pthread_self        0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceUserServiceTerminate
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+localtime_r         0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetListen        0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+isdigit             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelReboot     0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+fwrite              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelCreateEqueue
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+scePthreadCreate    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+sceNetNtohl         0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+sceNetGetsockopt    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+atoi                0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+scePthreadMutexLock
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+gmtime              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+strlen              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceKernelOpen       0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+strchr              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sceNetAccept        0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+libNet              0x4               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+closedir            0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+setuid              0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sysUtilHandle       0x4               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+sceKernelGetFsSandboxRandomWord
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceKernelAddReadEvent
+                    0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+sceNetSocketAbort   0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+telldir             0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+sysctlbyname        0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+free                0x8               /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+
+Discarded input sections
+
+ .data          0x0000000000000000        0x0 /tmp/ccc6XsCg.o
+ .bss           0x0000000000000000        0x0 /tmp/ccc6XsCg.o
+ .text          0x0000000000000000        0x0 build/debug.o
+ .data          0x0000000000000000        0x0 build/debug.o
+ .bss           0x0000000000000000        0x0 build/debug.o
+ .rodata.notify.str1.1
+                0x0000000000000000        0xa build/debug.o
+ .text.notify   0x0000000000000000       0x3b build/debug.o
+ .comment       0x0000000000000000       0x2c build/debug.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/debug.o
+ .note.gnu.property
+                0x0000000000000000       0x20 build/debug.o
+ .eh_frame      0x0000000000000000       0x38 build/debug.o
+ .text          0x0000000000000000        0x0 build/dump.o
+ .data          0x0000000000000000        0x0 build/dump.o
+ .bss           0x0000000000000000        0x0 build/dump.o
+ .text.print_phdr
+                0x0000000000000000        0x5 build/dump.o
+ .text.is_self  0x0000000000000000       0xb8 build/dump.o
+ .text.read_decrypt_segment
+                0x0000000000000000       0x96 build/dump.o
+ .text.is_segment_in_other_segment
+                0x0000000000000000       0x44 build/dump.o
+ .text.parse_phdr
+                0x0000000000000000       0xa9 build/dump.o
+ .text.do_dump  0x0000000000000000      0x117 build/dump.o
+ .text.decrypt_and_dump_self
+                0x0000000000000000       0xd2 build/dump.o
+ .comment       0x0000000000000000       0x2c build/dump.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/dump.o
+ .note.gnu.property
+                0x0000000000000000       0x20 build/dump.o
+ .eh_frame      0x0000000000000000      0x188 build/dump.o
+ .text          0x0000000000000000        0x0 build/ftps4.o
+ .data          0x0000000000000000        0x0 build/ftps4.o
+ .bss           0x0000000000000000        0x0 build/ftps4.o
+ .rodata.cmd_NOOP_func.str1.1
+                0x0000000000000000       0x16 build/ftps4.o
+ .text.cmd_NOOP_func
+                0x0000000000000000       0x36 build/ftps4.o
+ .rodata.cmd_USER_func.str1.1
+                0x0000000000000000       0x27 build/ftps4.o
+ .text.cmd_USER_func
+                0x0000000000000000       0x36 build/ftps4.o
+ .rodata.cmd_PASS_func.str1.1
+                0x0000000000000000       0x16 build/ftps4.o
+ .text.cmd_PASS_func
+                0x0000000000000000       0x36 build/ftps4.o
+ .rodata.cmd_QUIT_func.str1.1
+                0x0000000000000000       0x19 build/ftps4.o
+ .text.cmd_QUIT_func
+                0x0000000000000000       0x36 build/ftps4.o
+ .rodata.cmd_SYST_func.str1.1
+                0x0000000000000000       0x14 build/ftps4.o
+ .text.cmd_SYST_func
+                0x0000000000000000       0x36 build/ftps4.o
+ .rodata.cmd_PASV_func.str1.1
+                0x0000000000000000       0x58 build/ftps4.o
+ .text.cmd_PASV_func
+                0x0000000000000000      0x10d build/ftps4.o
+ .rodata.cmd_PORT_func.str1.1
+                0x0000000000000000       0x73 build/ftps4.o
+ .text.cmd_PORT_func
+                0x0000000000000000      0x148 build/ftps4.o
+ .text.client_close_data_connection
+                0x0000000000000000       0x25 build/ftps4.o
+ .text.file_type_char
+                0x0000000000000000       0x47 build/ftps4.o
+ .rodata.cmd_PWD_func.str1.1
+                0x0000000000000000       0x25 build/ftps4.o
+ .text.cmd_PWD_func
+                0x0000000000000000       0x5f build/ftps4.o
+ .rodata.cmd_TYPE_func.str1.1
+                0x0000000000000000       0x2e build/ftps4.o
+ .text.cmd_TYPE_func
+                0x0000000000000000       0xa4 build/ftps4.o
+ .rodata.cmd_REST_func.str1.1
+                0x0000000000000000       0x1f build/ftps4.o
+ .text.cmd_REST_func
+                0x0000000000000000       0x6b build/ftps4.o
+ .rodata.cmd_FEAT_func.str1.1
+                0x0000000000000000       0x29 build/ftps4.o
+ .text.cmd_FEAT_func
+                0x0000000000000000       0x80 build/ftps4.o
+ .rodata.client_thread.str1.1
+                0x0000000000000000       0x46 build/ftps4.o
+ .text.client_thread
+                0x0000000000000000      0x172 build/ftps4.o
+ .rodata.server_thread.str1.1
+                0x0000000000000000       0x2b build/ftps4.o
+ .text.server_thread
+                0x0000000000000000      0x20b build/ftps4.o
+ .text.client_send_data_msg
+                0x0000000000000000       0x41 build/ftps4.o
+ .text.client_open_data_connection
+                0x0000000000000000       0x42 build/ftps4.o
+ .rodata.receive_file.str1.1
+                0x0000000000000000       0x79 build/ftps4.o
+ .text.receive_file
+                0x0000000000000000      0x15a build/ftps4.o
+ .text.send_file
+                0x0000000000000000      0x154 build/ftps4.o
+ .text.dir_up   0x0000000000000000       0x38 build/ftps4.o
+ .rodata.cmd_CDUP_func.str1.1
+                0x0000000000000000       0x14 build/ftps4.o
+ .text.cmd_CDUP_func
+                0x0000000000000000       0x42 build/ftps4.o
+ .rodata.cmd_CWD_func.str1.1
+                0x0000000000000000       0x5c build/ftps4.o
+ .text.cmd_CWD_func
+                0x0000000000000000      0x1ab build/ftps4.o
+ .text.gen_ftp_fullpath
+                0x0000000000000000       0xac build/ftps4.o
+ .text.cmd_APPE_func
+                0x0000000000000000       0x45 build/ftps4.o
+ .text.cmd_STOR_func
+                0x0000000000000000       0x3b build/ftps4.o
+ .rodata.cmd_RNTO_func.str1.1
+                0x0000000000000000       0x37 build/ftps4.o
+ .text.cmd_RNTO_func
+                0x0000000000000000       0x89 build/ftps4.o
+ .rodata.cmd_RETR_func.str1.1
+                0x0000000000000000       0x10 build/ftps4.o
+ .text.cmd_RETR_func
+                0x0000000000000000       0x71 build/ftps4.o
+ .rodata.cmd_DELE_func.str1.1
+                0x0000000000000000       0x35 build/ftps4.o
+ .text.cmd_DELE_func
+                0x0000000000000000       0x7a build/ftps4.o
+ .rodata.cmd_SIZE_func.str1.1
+                0x0000000000000000       0x29 build/ftps4.o
+ .text.cmd_SIZE_func
+                0x0000000000000000       0xa8 build/ftps4.o
+ .rodata.cmd_RNFR_func.str1.1
+                0x0000000000000000       0x28 build/ftps4.o
+ .text.cmd_RNFR_func
+                0x0000000000000000       0x92 build/ftps4.o
+ .rodata.cmd_MKD_func.str1.1
+                0x0000000000000000       0x3f build/ftps4.o
+ .text.cmd_MKD_func
+                0x0000000000000000       0x7f build/ftps4.o
+ .rodata.cmd_RMD_func.str1.1
+                0x0000000000000000       0x5d build/ftps4.o
+ .text.cmd_RMD_func
+                0x0000000000000000       0xac build/ftps4.o
+ .rodata.send_LIST.str1.1
+                0x0000000000000000       0xc5 build/ftps4.o
+ .text.send_LIST
+                0x0000000000000000      0x5a0 build/ftps4.o
+ .text.cmd_LIST_func
+                0x0000000000000000       0x61 build/ftps4.o
+ .text.ftps4_fini
+                0x0000000000000000       0xe7 build/ftps4.o
+ .text.ftps4_is_initialized
+                0x0000000000000000        0xb build/ftps4.o
+ .text.ftps4_set_file_buf_size
+                0x0000000000000000        0xb build/ftps4.o
+ .text.ftps4_ext_add_command
+                0x0000000000000000       0x41 build/ftps4.o
+ .rodata.ftps4_init.str1.1
+                0x0000000000000000       0x9b build/ftps4.o
+ .text.ftps4_init
+                0x0000000000000000      0x25a build/ftps4.o
+ .text.ftps4_ext_del_command
+                0x0000000000000000       0x57 build/ftps4.o
+ .text.ftps4_ext_client_send_ctrl_msg
+                0x0000000000000000       0x3c build/ftps4.o
+ .text.ftps4_ext_client_send_data_msg
+                0x0000000000000000        0x9 build/ftps4.o
+ .text.ftps4_gen_ftp_fullpath
+                0x0000000000000000        0x9 build/ftps4.o
+ .rodata.num_to_month.3403
+                0x0000000000000000       0x30 build/ftps4.o
+ .bss.client_list_mtx
+                0x0000000000000000        0x8 build/ftps4.o
+ .bss.client_list
+                0x0000000000000000        0x8 build/ftps4.o
+ .bss.number_clients
+                0x0000000000000000        0x4 build/ftps4.o
+ .bss.server_sockfd
+                0x0000000000000000        0x4 build/ftps4.o
+ .bss.server_thid
+                0x0000000000000000        0x8 build/ftps4.o
+ .bss.ps4_port  0x0000000000000000        0x2 build/ftps4.o
+ .bss.ps4_addr  0x0000000000000000        0x4 build/ftps4.o
+ .bss.file_buf_size
+                0x0000000000000000        0x4 build/ftps4.o
+ .bss.ftp_initialized
+                0x0000000000000000        0x4 build/ftps4.o
+ .bss.command_dispatchers
+                0x0000000000000000      0x300 build/ftps4.o
+ .comment       0x0000000000000000       0x2c build/ftps4.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/ftps4.o
+ .note.gnu.property
+                0x0000000000000000       0x20 build/ftps4.o
+ .eh_frame      0x0000000000000000      0x7d8 build/ftps4.o
+ .text          0x0000000000000000        0x0 build/main.o
+ .data          0x0000000000000000        0x0 build/main.o
+ .bss           0x0000000000000000        0x0 build/main.o
+ .comment       0x0000000000000000       0x2c build/main.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/main.o
+ .note.gnu.property
+                0x0000000000000000       0x20 build/main.o
+ .eh_frame      0x0000000000000000       0x58 build/main.o
+ .text          0x0000000000000000      0x108 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.getSandboxDirectory
+                0x0000000000000000       0x1b /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.file_exists
+                0x0000000000000000       0x23 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.dir_exists
+                0x0000000000000000       0x28 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.symlink_exists
+                0x0000000000000000       0x3a /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.touch_file
+                0x0000000000000000       0x23 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.copy_file
+                0x0000000000000000       0x99 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .rodata.copy_dir.str1.1
+                0x0000000000000000        0xb /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.copy_dir
+                0x0000000000000000      0x132 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.file_compare
+                0x0000000000000000      0x175 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.rmtree   0x0000000000000000      0x143 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.fgetc_pointer
+                0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.build_iovec
+                0x0000000000000000       0xec /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .rodata.mount_large_fs.str1.1
+                0x0000000000000000       0x4b /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text.mount_large_fs
+                0x0000000000000000      0x14f /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .comment       0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .note.gnu.property
+                0x0000000000000000       0x20 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .eh_frame      0x0000000000000000      0x260 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(file.o)
+ .text          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .rodata.initUserService.str1.1
+                0x0000000000000000       0xb3 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .text.initUserService
+                0x0000000000000000       0x9f /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .text.openBrowser
+                0x0000000000000000       0x12 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .text.getUserIDList
+                0x0000000000000000       0x47 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .text.getUserID
+                0x0000000000000000       0x18 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .text.getUserName
+                0x0000000000000000       0x8d /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .text.getInitialUser
+                0x0000000000000000       0x45 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .rodata.shutdown.str1.1
+                0x0000000000000000       0x11 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .text.shutdown
+                0x0000000000000000       0x55 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .rodata.reboot.str1.1
+                0x0000000000000000       0x32 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .text.reboot   0x0000000000000000       0x41 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .comment       0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .note.gnu.property
+                0x0000000000000000       0x20 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .eh_frame      0x0000000000000000      0x120 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .text          0x0000000000000000       0x60 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(memory.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(memory.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(memory.o)
+ .comment       0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(memory.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(memory.o)
+ .note.gnu.property
+                0x0000000000000000       0x20 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(memory.o)
+ .text          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(debug.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(debug.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(debug.o)
+ .comment       0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(debug.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(debug.o)
+ .note.gnu.property
+                0x0000000000000000       0x20 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(debug.o)
+ .text          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+ .text.memset_s
+                0x0000000000000000       0x51 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+ .comment       0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+ .note.gnu.property
+                0x0000000000000000       0x20 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+ .eh_frame      0x0000000000000000       0x68 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .text.getModuleInfo
+                0x0000000000000000       0x1f /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .text.unloadModule
+                0x0000000000000000       0x19 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .rodata.initModule.str1.1
+                0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .text.initModule
+                0x0000000000000000       0x47 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .comment       0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .note.gnu.property
+                0x0000000000000000       0x20 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .eh_frame      0x0000000000000000       0x80 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ COMMON         0x0000000000000000        0xc /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+ .text          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .text.SckConnect
+                0x0000000000000000       0xa9 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .text.SckClose
+                0x0000000000000000        0xd /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .text.SckRecv  0x0000000000000000       0xce /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .text.SckRecvf
+                0x0000000000000000       0x7b /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .comment       0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .note.gnu.property
+                0x0000000000000000       0x20 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .eh_frame      0x0000000000000000      0x118 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .text          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ .rodata.initPthread.str1.1
+                0x0000000000000000       0xf5 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ .text.initPthread
+                0x0000000000000000      0x13b /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ .comment       0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ .note.gnu.property
+                0x0000000000000000       0x20 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ .eh_frame      0x0000000000000000       0x48 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ COMMON         0x0000000000000000       0x70 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(pthread.o)
+ .text          0x0000000000000000       0x24 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+ .comment       0x0000000000000000       0x2c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+ .note.gnu.property
+                0x0000000000000000       0x20 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+ .eh_frame      0x0000000000000000       0x50 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+ .data          0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(syscall.o)
+ .bss           0x0000000000000000        0x0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(syscall.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /tmp/ccc6XsCg.o
+LOAD build/debug.o
+LOAD build/dump.o
+LOAD build/ftps4.o
+LOAD build/main.o
+
+.text           0x0000000000000000      0xea2
+ *(.text.start)
+ *(.text*)
+ .text          0x0000000000000000        0x5 /tmp/ccc6XsCg.o
+                0x0000000000000000                _start
+ .text.kpayload
+                0x0000000000000005       0x26 build/main.o
+                0x0000000000000005                kpayload
+ .text._main    0x000000000000002b      0x1ba build/main.o
+                0x000000000000002b                _main
+ .text.initSysUtil
+                0x00000000000001e5       0x86 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+                0x00000000000001e5                initSysUtil
+ .text.initLibc
+                0x000000000000026b      0x5d2 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+                0x000000000000026b                initLibc
+ .text          0x000000000000083d       0x18 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+                0x000000000000083d                getFunctionAddressByName
+                0x0000000000000849                getLoadedModules
+ .text.loadModule
+                0x0000000000000855       0x1e /home/lm/ps4-payload-sdk/libPS4/libPS4.a(module.o)
+                0x0000000000000855                loadModule
+ .text.initNetwork
+                0x0000000000000873      0x258 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+                0x0000000000000873                initNetwork
+ .text.SckSend  0x0000000000000acb       0x15 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+                0x0000000000000acb                SckSend
+ .text.initKernel
+                0x0000000000000ae0      0x394 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+                0x0000000000000ae0                initKernel
+ .text          0x0000000000000e74       0x2e /home/lm/ps4-payload-sdk/libPS4/libPS4.a(syscall.o)
+                0x0000000000000e74                syscall
+                0x0000000000000e77                syscall_macro
+
+.plt            0x0000000000000eb0        0x0
+ .plt           0x0000000000000eb0        0x0 /tmp/ccc6XsCg.o
+
+.plt.got        0x0000000000000ea8        0x0
+ .plt.got       0x0000000000000ea8        0x0 /tmp/ccc6XsCg.o
+
+.rodata         0x0000000000000ea2      0x784
+ *(.rodata)
+ *(.rodata*)
+ .rodata._main.str1.1
+                0x0000000000000ea2       0xbc build/main.o
+ .rodata.initSysUtil.str1.1
+                0x0000000000000f5e       0x9c /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+ .rodata.initLibc.str1.1
+                0x0000000000000ffa      0x1f8 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+                                        0x216 (size before relaxing)
+ .rodata.initNetwork.str1.1
+                0x00000000000011f2      0x173 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+ .rodata.initKernel.str1.1
+                0x0000000000001365      0x2c1 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+                                        0x2d4 (size before relaxing)
+
+.gnu.version_d  0x0000000000001628        0x0
+ .gnu.version_d
+                0x0000000000001628        0x0 /tmp/ccc6XsCg.o
+
+.gnu.version    0x0000000000001626        0x0
+ .gnu.version   0x0000000000001626        0x0 /tmp/ccc6XsCg.o
+
+.gnu.version_r  0x0000000000001628        0x0
+ .gnu.version_r
+                0x0000000000001628        0x0 /tmp/ccc6XsCg.o
+
+.dynsym         0x0000000000001628       0x18
+ .dynsym        0x0000000000001628       0x18 /tmp/ccc6XsCg.o
+
+.dynstr         0x0000000000001640        0x1
+ .dynstr        0x0000000000001640        0x1 /tmp/ccc6XsCg.o
+
+.gnu.hash       0x0000000000001648       0x1c
+ .gnu.hash      0x0000000000001648       0x1c /tmp/ccc6XsCg.o
+
+.eh_frame_hdr   0x0000000000001664        0x0
+ .eh_frame_hdr  0x0000000000001664        0x0 build/debug.o
+
+.rela.dyn       0x0000000000001668        0x0
+ .rela.plt      0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.got      0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.bss      0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.data.rel.ro
+                0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.ifunc    0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.text._main
+                0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.text.initSysUtil
+                0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.text.initLibc
+                0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.text.initNetwork
+                0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.text.SckSend
+                0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.text.initKernel
+                0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+ .rela.text     0x0000000000001668        0x0 /tmp/ccc6XsCg.o
+
+.data
+ *(.data)
+
+.dynamic        0x0000000000001668       0xe0
+ .dynamic       0x0000000000001668       0xe0 /tmp/ccc6XsCg.o
+                0x0000000000001668                _DYNAMIC
+
+.got            0x0000000000001748        0x0
+ .got           0x0000000000001748        0x0 /tmp/ccc6XsCg.o
+
+.got.plt        0x0000000000001748        0x0
+ .got.plt       0x0000000000001748        0x0 /tmp/ccc6XsCg.o
+
+.data.rel.ro    0x0000000000001748        0x0
+ .data.rel.ro   0x0000000000001748        0x0 /tmp/ccc6XsCg.o
+
+.data.DEBUG_SOCK
+                0x0000000000001748        0x4
+ .data.DEBUG_SOCK
+                0x0000000000001748        0x4 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(debug.o)
+                0x0000000000001748                DEBUG_SOCK
+
+.bss            0x0000000000001750      0x488
+ *(.bss)
+ COMMON         0x0000000000001750       0x54 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(sysutil.o)
+                0x0000000000001750                sceUserServiceInitialize
+                0x0000000000001758                sceSysUtilSendSystemNotificationWithText
+                0x0000000000001760                sceUserServiceGetInitialUser
+                0x0000000000001768                libSceUserService
+                0x0000000000001770                sceSystemServiceLaunchWebBrowser
+                0x0000000000001778                sceUserServiceGetUserName
+                0x0000000000001780                libSceSystemService
+                0x0000000000001788                sceUserServiceGetLoginUserIdList
+                0x0000000000001790                sceUserServiceTerminate
+                0x0000000000001798                sceKernelReboot
+                0x00000000000017a0                sysUtilHandle
+ *fill*         0x00000000000017a4        0x4 
+ COMMON         0x00000000000017a8      0x220 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(libc.o)
+                0x00000000000017a8                strcpy
+                0x00000000000017b0                asctime
+                0x00000000000017b8                libc
+                0x00000000000017c0                strerror
+                0x00000000000017c8                memmove
+                0x00000000000017d0                snprintf
+                0x00000000000017d8                strncpy_s
+                0x00000000000017e0                ceil
+                0x00000000000017e8                memcpy
+                0x00000000000017f0                seekdir
+                0x00000000000017f8                rewinddir
+                0x0000000000001800                malloc
+                0x0000000000001808                readdir_r
+                0x0000000000001810                getprogname
+                0x0000000000001818                readdir
+                0x0000000000001820                strtol
+                0x0000000000001828                snprintf_s
+                0x0000000000001830                strrchr
+                0x0000000000001838                calloc
+                0x0000000000001840                rindex
+                0x0000000000001848                atof
+                0x0000000000001850                _Getpctype
+                0x0000000000001858                fprintf
+                0x0000000000001860                ctime
+                0x0000000000001868                strcat
+                0x0000000000001870                fseek
+                0x0000000000001878                mktime
+                0x0000000000001880                strstr
+                0x0000000000001888                rand
+                0x0000000000001890                dirfd
+                0x0000000000001898                strlcpy
+                0x00000000000018a0                strncmp
+                0x00000000000018a8                strncpy
+                0x00000000000018b0                realloc
+                0x00000000000018b8                bcopy
+                0x00000000000018c0                strtok
+                0x00000000000018c8                memcmp
+                0x00000000000018d0                sscanf
+                0x00000000000018d8                strncat
+                0x00000000000018e0                memmove_s
+                0x00000000000018e8                fread
+                0x00000000000018f0                _Stoul
+                0x00000000000018f8                strdup
+                0x0000000000001900                index
+                0x0000000000001908                fopen
+                0x0000000000001910                asctime_r
+                0x0000000000001918                localtime
+                0x0000000000001920                memset
+                0x0000000000001928                ftell
+                0x0000000000001930                srand
+                0x0000000000001938                fclose
+                0x0000000000001940                time
+                0x0000000000001948                opendir
+                0x0000000000001950                strcmp
+                0x0000000000001958                gmtime_s
+                0x0000000000001960                memalign
+                0x0000000000001968                sprintf
+                0x0000000000001970                ctime_r
+                0x0000000000001978                localtime_r
+                0x0000000000001980                isdigit
+                0x0000000000001988                fwrite
+                0x0000000000001990                atoi
+                0x0000000000001998                gmtime
+                0x00000000000019a0                strlen
+                0x00000000000019a8                strchr
+                0x00000000000019b0                closedir
+                0x00000000000019b8                telldir
+                0x00000000000019c0                free
+ COMMON         0x00000000000019c8       0xd0 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(network.o)
+                0x00000000000019c8                sceNetCtlInit
+                0x00000000000019d0                sceNetHtonll
+                0x00000000000019d8                sceNetNtohll
+                0x00000000000019e0                sceNetCtlGetInfo
+                0x00000000000019e8                sceNetInetNtop
+                0x00000000000019f0                sceNetSocket
+                0x00000000000019f8                sceNetInetPton
+                0x0000000000001a00                sceNetGetsockname
+                0x0000000000001a08                sceNetHtons
+                0x0000000000001a10                sceNetSend
+                0x0000000000001a18                sceNetHtonl
+                0x0000000000001a20                sceNetErrnoLoc
+                0x0000000000001a28                sceNetSetsockopt
+                0x0000000000001a30                sceNetSocketClose
+                0x0000000000001a38                sceNetRecv
+                0x0000000000001a40                sceNetBind
+                0x0000000000001a48                libNetCtl
+                0x0000000000001a50                sceNetConnect
+                0x0000000000001a58                sceNetNtohs
+                0x0000000000001a60                sceNetCtlTerm
+                0x0000000000001a68                sceNetListen
+                0x0000000000001a70                sceNetNtohl
+                0x0000000000001a78                sceNetGetsockopt
+                0x0000000000001a80                sceNetAccept
+                0x0000000000001a88                libNet
+                0x0000000000001a90                sceNetSocketAbort
+ COMMON         0x0000000000001a98      0x140 /home/lm/ps4-payload-sdk/libPS4/libPS4.a(kernel.o)
+                0x0000000000001a98                sceKernelGettimeofday
+                0x0000000000001aa0                getgid
+                0x0000000000001aa8                libKernelHandle
+                0x0000000000001ab0                __stack_chk_guard
+                0x0000000000001ab8                sceKernelGetDirectMemorySize
+                0x0000000000001ac0                execve
+                0x0000000000001ac8                getpid
+                0x0000000000001ad0                sceKernelSleep
+                0x0000000000001ad8                sceKernelGetCurrentCpu
+                0x0000000000001ae0                sceKernelDeleteEqueue
+                0x0000000000001ae8                sceKernelGetCpuTemperature
+                0x0000000000001af0                getuid
+                0x0000000000001af8                __stack_chk_fail
+                0x0000000000001b00                sceKernelMapDirectMemory
+                0x0000000000001b08                sysarch
+                0x0000000000001b10                sceKernelError
+                0x0000000000001b18                sysctl
+                0x0000000000001b20                sceKernelRead
+                0x0000000000001b28                setregid
+                0x0000000000001b30                __error
+                0x0000000000001b38                sceKernelSendNotificationRequest
+                0x0000000000001b40                setgid
+                0x0000000000001b48                sceKernelLseek
+                0x0000000000001b50                sceKernelStat
+                0x0000000000001b58                sceKernelLoadStartModule
+                0x0000000000001b60                sceKernelGetSystemSwVersion
+                0x0000000000001b68                sceKernelClose
+                0x0000000000001b70                pthread_setaffinity_np
+                0x0000000000001b78                sceKernelGetProcessTime
+                0x0000000000001b80                setreuid
+                0x0000000000001b88                sceKernelAllocateDirectMemory
+                0x0000000000001b90                sceKernelUsleep
+                0x0000000000001b98                sceKernelAddUserEvent
+                0x0000000000001ba0                pthread_self
+                0x0000000000001ba8                sceKernelCreateEqueue
+                0x0000000000001bb0                sceKernelOpen
+                0x0000000000001bb8                setuid
+                0x0000000000001bc0                sceKernelGetFsSandboxRandomWord
+                0x0000000000001bc8                sceKernelAddReadEvent
+                0x0000000000001bd0                sysctlbyname
+
+.dynbss         0x0000000000001bd8        0x0
+ .dynbss        0x0000000000001bd8        0x0 /tmp/ccc6XsCg.o
+
+.bss.sceKernelDebugOutText.3462
+                0x0000000000001bd8        0x8
+ .bss.sceKernelDebugOutText.3462
+                0x0000000000001bd8        0x8 build/main.o
+
+.bss.kernel_base
+                0x0000000000001be0        0x8
+ .bss.kernel_base
+                0x0000000000001be0        0x8 build/main.o
+                0x0000000000001be0                kernel_base
+
+/DISCARD/
+ *(.comment)
+ *(.note.GNU-stack)
+ *(.eh_frame)
+ *(.interp)
+LOAD /home/lm/ps4-payload-sdk/libPS4/libPS4.a
+OUTPUT(temp.t elf64-x86-64)
