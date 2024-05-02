@@ -15,6 +15,11 @@ The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to
 - Linux
   - You can use VirtualBox to create a Linux VM with `Bridged Adapter` as network adapter to use the ethernet port in the VM.
 - Python3 and gcc installed
+- PS4 Scene-Collective SDK for the payload
+
+## Stage2 PoC payload loader
+- default loads the embedded payload in the stage 2 folder
+- has code for loading payloads from a USB (WIP)
 
 ## Usage
 

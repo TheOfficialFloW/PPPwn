@@ -8,7 +8,50 @@
 #ifndef __OFFSETS_H__
 #define __OFFSETS_H__
 
+
 #if FIRMWARE == 900 // FW 9.00
+
+
+#define enable_data_mount_patch 0x0032079B
+#define enable_fpkg_patch 0x003D7AFF
+#define fake_free_patch 0x00FD3211
+#define pkg_installer_patch 0x00A10A81
+#define ext_hdd_patch 0x006180FD
+#define debug_trophies_patch 0x00743299
+
+#define sceKernelIsGenuineCEX 0x0016EAA4
+#define sceKernelIsGenuineCEX_1 0x008621D4
+#define sceKernelIsGenuineCEX_2 0x008AFBC2
+#define sceKernelIsGenuineCEX_3 0x00A27BD4
+#define dipsw_libSceDipsw 0x0016EAD2 
+#define dipsw_libSceDipsw_1 0x00249F7B 
+#define dipsw_libSceDipsw_2 0x00862202 
+#define dipsw_libSceDipsw_3 0x00A27C02 
+
+//kern
+#define vm_map_protect_p 0x00080B8B
+#define ptrace_p 0x41F4E5
+#define ptrace_p2 0x41F9D1
+#define disable_aslr_p 0x5F824
+#define sceSblACMgrIsAllowedSystemLevelDebugging_p 0x0001D1C0
+#define kemem_2 0x37BF44
+#define kemem_1 0x37BF3C
+#define vm_map_lock_offset 0x0007BA30
+#define vm_map_insert_offset 0x0007CD80
+#define vm_map_unlock_offset 0x0007BAA0
+#define malloc_offset 0x00301B20
+#define free_offset 0x00301CE0
+#define vm_map_lock_read_offset 0x0007BB80
+#define vm_map_unlock_read_offset 0x0007BBD0
+#define vm_map_lookup_entry_offset 0x0007C1C0
+#define M_TEMP_offset 0x015621E0 
+#define proc_rmem_offset 0x0041EB00
+#define vm_map_findspace_offset 0x0007EC40
+#define vm_map_delete_offset 0x0007E680
+#define create_thread_offset 0x001ED670
+#define all_proc_offset 0x01B946E0
+
+/* kernel offsets */
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 
