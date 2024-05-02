@@ -64,7 +64,7 @@
 #define kdlsym_addr_uart_patch 0xffffffff8372cff8
 #define kdlsym_addr_veri_patch 0xffffffff82823f64
 
-#elif FIRMWARE == 1050 // FW 10.50
+#elif (FIRMWARE == 1050 || FIRMWARE == 1070 || FIRMWARE == 1071) // FW 10.50 / 10.70 / 10.71
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 

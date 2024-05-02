@@ -191,7 +191,7 @@ class OffsetsFirmware_1100:
     # 0xffffffff82b84657 : jmp r14
     JMP_R14 = 0xffffffff82b84657
 
-# FW 10.50
+# FW 10.50 / 10.70 / 10.71
 class OffsetsFirmware_1050:
     PPPOE_SOFTC_LIST = 0xffffffff844514b8
 

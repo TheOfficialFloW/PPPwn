@@ -53,7 +53,7 @@
 #define kdlsym_addr_copyinstr_patch2 0xffffffff824de4ef
 #define kdlsym_addr_copyinstr_patch3 0xffffffff824de520
 
-#elif FIRMWARE == 1050 // FW 10.50
+#elif (FIRMWARE == 1050 || FIRMWARE == 1070 || FIRMWARE == 1071) // FW 10.50 / 10.70 / 10.71
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 #define kdlsym_addr_printf 0xffffffff82650e80

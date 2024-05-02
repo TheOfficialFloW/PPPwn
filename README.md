@@ -4,6 +4,7 @@ PPPwn is a kernel remote code execution exploit for PlayStation 4 upto FW 11.00.
 Supported versions are:
 - FW 9.00
 - FW 11.00
+- FW 10.50 / 10.70 / 10.71
 - more can be added (PRs are welcome)
 
 The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to launch Mira or similar homebrew enablers, the `stage2.bin` payload needs to be adapted.

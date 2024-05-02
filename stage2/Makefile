@@ -6,7 +6,7 @@ OBJCOPY = objcopy
 CFLAGS = -DSMP -isystem ../freebsd-headers/include -Wl,--build-id=none -Os -fno-stack-protector
 LDFLAGS = -T linker.ld -nostartfiles -nostdlib
 
-ifneq ($(filter $(FW), 900 1100 1050),)
+ifneq ($(filter $(FW), 900 1100 1050 1070 1071),)
 CFLAGS += -DFIRMWARE=$(FW)
 else
 $(error "Invalid firmware")
