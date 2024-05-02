@@ -190,3 +190,96 @@ class OffsetsFirmware_1100:
 
     # 0xffffffff82b84657 : jmp r14
     JMP_R14 = 0xffffffff82b84657
+
+# FW 10.50
+class OffsetsFirmware_1050:
+    PPPOE_SOFTC_LIST = 0xffffffff844514b8
+
+    KERNEL_MAP = 0xffffffff844a9250
+
+    SETIDT = 0xffffffff82341470
+
+    KMEM_ALLOC = 0xffffffff82628960
+    KMEM_ALLOC_PATCH1 = 0xffffffff82628a2c
+    KMEM_ALLOC_PATCH2 = 0xffffffff82628a34
+
+    MEMCPY = 0xffffffff822d7370
+
+    MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff82285f39
+
+    SECOND_GADGET_OFF = 0x3b
+
+    # 0xffffffff8221cb8d : jmp qword ptr [rsi + 0x3b]
+    FIRST_GADGET = 0xffffffff8221cb8d
+
+    # 0xffffffff82c74cd6 : push rbp ; jmp qword ptr [rsi]
+    PUSH_RBP_JMP_QWORD_PTR_RSI = 0xffffffff82c74cd6
+
+    # 0xffffffff824a4981 : pop rbx ; pop r14 ; pop rbp ; jmp qword ptr [rsi + 0x10]
+    POP_RBX_POP_R14_POP_RBP_JMP_QWORD_PTR_RSI_10 = 0xffffffff824a4981
+
+    # 0xffffffff82921206 : lea rsp, [rsi + 0x20] ; repz ret
+    LEA_RSP_RSI_20_REPZ_RET = 0xffffffff82921206
+
+    # 0xffffffff826c493a : add rsp, 0x28 ; pop rbp ; ret
+    ADD_RSP_28_POP_RBP_RET = 0xffffffff826c493a
+
+    # 0xffffffff822ce1af : add rsp, 0xb0 ; pop rbp ; ret
+    ADD_RSP_B0_POP_RBP_RET = 0xffffffff822ce1af
+
+    # 0xffffffff822008e0 : ret
+    RET = 0xffffffff822008e0
+
+    # 0xffffffff8236f38f : pop rdi ; ret
+    POP_RDI_RET = 0xffffffff8236f38f
+
+    # 0xffffffff82222d59 : pop rsi ; ret
+    POP_RSI_RET = 0xffffffff82222d59
+
+    # 0xffffffff82329bb2 : pop rdx ; ret
+    POP_RDX_RET = 0xffffffff82329bb2
+
+    # 0xffffffff8225a567 : pop rcx ; ret
+    POP_RCX_RET = 0xffffffff8225a567
+
+    # 0xffffffff822234fd : pop r8 ; pop rbp ; ret
+    POP_R8_POP_RBP_RET = 0xffffffff822234fd
+
+    # 0xffffffff827aa3ef : pop r12 ; ret
+    POP_R12_RET = 0xffffffff827aa3ef
+
+    # 0xffffffff82495c08 : pop rax ; ret
+    POP_RAX_RET = 0xffffffff82495c08
+
+    # 0xffffffff822008df : pop rbp ; ret
+    POP_RBP_RET = 0xffffffff822008df
+
+    # 0xffffffff82bb5092 : push rsp ; pop rsi ; ret
+    PUSH_RSP_POP_RSI_RET = 0xffffffff82bb5092
+
+    # 0xffffffff8256d4d0 : mov rdi, qword ptr [rdi] ; pop rbp ; jmp rax
+    MOV_RDI_QWORD_PTR_RDI_POP_RBP_JMP_RAX = 0xffffffff8256d4d0
+
+    # 0xffffffff822a9078 : mov byte ptr [rcx], al ; ret
+    MOV_BYTE_PTR_RCX_AL_RET = 0xffffffff822a9078
+
+    # 0xffffffff8229113c : mov rdi, rbx ; call r12
+    MOV_RDI_RBX_CALL_R12 = 0xffffffff8229113c
+
+    # 0xffffffff82290f77 : mov rdi, r14 ; call r12
+    MOV_RDI_R14_CALL_R12 = 0xffffffff82290f77
+
+    # 0xffffffff8227e3ce : mov rsi, rbx ; call rax
+    MOV_RSI_RBX_CALL_RAX = 0xffffffff8227e3ce
+
+    # 0xffffffff824f95e8 : mov r14, rax ; call r8
+    MOV_R14_RAX_CALL_R8 = 0xffffffff824f95e8
+
+    # 0xffffffff82cb4eca : add rdi, rcx ; ret
+    ADD_RDI_RCX_RET = 0xffffffff82cb4eca
+
+    # 0xffffffff8220c1e7 : sub rsi, rdx ; mov rax, rsi ; pop rbp ; ret
+    SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET = 0xffffffff8220c1e7
+
+    # 0xffffffff82b83a5b : jmp r14
+    JMP_R14 = 0xffffffff82b83a5b
