@@ -1,5 +1,5 @@
 TARGET = stage2
-OBJS = start.o stage2.o proc_utils.o  utils.o
+OBJS = start.o stage2.o proc_utils.o 
 
 CC = gcc
 OBJCOPY = objcopy
