@@ -8,7 +8,7 @@ Supported versions are:
 - FW 10.00 / 10.01
 - FW 10.50 / 10.70 / 10.71
 - FW 11.00
-- more can be added (PRs are welcome)
+- Additional firmware versions can be supported through pull requests (PRs are welcome). Please note that 'FW' stands for 'Firmware' throughout this documentation.
 
 The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to launch Mira or similar homebrew enablers, the `stage2.bin` payload needs to be adapted.
 
