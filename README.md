@@ -41,13 +41,28 @@ sudo pip install -r requirements.txt
 ```
 
 <details>
-  <summary>Arch Linux (pacman)</summary>
+  <summary>Alterative install instructions (optional)</summary>
 
+>Install using venv to create a virtual environment.
+>
+>```sh
+>python3 -m venv .venv
+>source ./.venv/bin/activate
+>pip install -r requirements.txt
+>```
+
+>Install python dependencies globally. (not recommended)
+>
+>Ubuntu
+>```sh
+>sudo apt-get install python-scapy
+>```
+>Arch Linux
 >```sh
 >sudo pacman -S python-scapy
 >```
->If you get, `sudo: pacman: command not found`, skip. You are not using an arch based distro.
-
+>
+ >Note: If you get, `command not found`, you are using the wrong package manager.
 </details>
 
 Compile the payloads:
