@@ -836,8 +836,10 @@ def main():
 
     with open(args.stage2, mode='rb') as f:
         stage2 = f.read()
-
-    if args.fw == '900':
+    
+    if args.fw == '672':
+        offs = OffsetsFirmware_672()
+    elif args.fw == '900':
         offs = OffsetsFirmware_900()
     elif args.fw in ('903', '904'):
         offs = OffsetsFirmware_903_904()
