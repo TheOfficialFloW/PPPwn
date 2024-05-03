@@ -55,7 +55,7 @@ sudo pip install -r requirements.txt
 >
 >Ubuntu
 >```sh
->sudo apt-get install python-scapy
+>sudo apt-get install python3-scapy
 >```
 >Arch Linux
 >```sh
