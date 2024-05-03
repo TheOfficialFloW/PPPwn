@@ -1,7 +1,7 @@
 # PPPwn - PlayStation 4 PPPoE RCE
 PPPwn is a kernel remote code execution exploit for PlayStation 4 upto FW 11.00. This is a proof-of-concept exploit for [CVE-2006-4304](https://hackerone.com/reports/2177925) that was reported responsibly to PlayStation.
 
-Supported versions are:
+Supported/tested versions are:
 - FW 9.00
 - FW 9.03 / 9.04
 - FW 9.50 / 9.60
@@ -13,7 +13,7 @@ Supported versions are:
 The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to launch Mira or similar homebrew enablers, the `stage2.bin` payload needs to be adapted.
 
 ## Requirements
-- Computer with Ethernet port
+- Computer with an Ethernet port
   - USB adapter also works
 - Ethernet cable
 - Linux
@@ -22,7 +22,7 @@ The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to
 
 ## Usage
 
-On your computer, clone the repository:
+Install `git`, and clone the following repository:
 
 ```sh
 git clone --recursive https://github.com/TheOfficialFloW/PPPwn
@@ -32,6 +32,11 @@ Install the requirements:
 
 ```sh
 sudo pip install -r requirements.txt
+```
+or
+
+```sh
+sudo python3 -m pip install scapy
 ```
 
 Compile the payloads:
@@ -43,7 +48,7 @@ make -C stage2 FW=1100 clean && make -C stage2 FW=1100
 
 For other firmwares, e.g. FW 9.00, pass `FW=900`.
 
-Run the exploit (see `ifconfig` for the correct interface):
+Run the exploit (see `ifconfig` or `ip a` for the correct interface):
 
 ```sh
 sudo python3 pppwn.py --interface=enp0s3 --fw=1100
