@@ -28,6 +28,12 @@ On your computer, clone the repository:
 git clone --recursive https://github.com/TheOfficialFloW/PPPwn
 ```
 
+Change the directory to the cloned repository:
+
+```sh
+cd PPPwn
+```
+
 Install the requirements:
 
 ```sh
