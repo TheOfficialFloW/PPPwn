@@ -22,7 +22,7 @@ class OffsetsFirmware_850:
 
     SECOND_GADGET_OFF = 0x3c
 
-    # 0xffffffff839dc691 : jmp qword ptr [rsi + 0x3d]
+    # 0xffffffff839dc691 : jmp qword ptr [rsi + 0x3c]
     FIRST_GADGET = 0xffffffff839dc691
 
     # 0xffffffff82c766e6 : push rbp ; jmp qword ptr [rsi]
@@ -94,8 +94,8 @@ class OffsetsFirmware_850:
     # 0xffffffff82346e67 : sub rsi, rdx ; mov rax, rsi ; pop rbp ; ret
     SUB_RSI_RDX_MOV_RAX_RSI_POP_RBP_RET = 0xffffffff82346e67
 
-    # 0xffffffff82b2a622 : jmp r14
-    JMP_R14 = 0xffffffff82b2a622
+    # 0xffffffff82b845c7 : jmp r14
+    JMP_R14 = 0xffffffff82b845c7
 
 # FW 9.00
 class OffsetsFirmware_900:

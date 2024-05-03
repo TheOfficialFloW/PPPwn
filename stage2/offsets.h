@@ -22,8 +22,8 @@
 #define kdlsym_addr_amd_syscall_patch3 0xffffffff822004b9 // Identical to 9.00
 #define kdlsym_addr_amd_syscall_patch4 0xffffffff822004c2 // Identical to 9.00
 
-#define kdlsym_addr_copyin_patch1 0xffffffff825a4337 // ??
-#define kdlsym_addr_copyin_patch2 0xffffffff825a4343 // ??
+#define kdlsym_addr_copyin_patch1 0xffffffff825a4337
+#define kdlsym_addr_copyin_patch2 0xffffffff825a4343
 
 #define kdlsym_addr_copyout_patch1 0xffffffff825a4242
 #define kdlsym_addr_copyout_patch2 0xffffffff825a424e
