@@ -12,6 +12,8 @@ extern uint8_t payloadbin[];
 extern int32_t payloadbin_size;
 
 
+struct sysent *sysents;
+
 
 int memcmp(const void * str1,
   const void * str2, size_t count) {

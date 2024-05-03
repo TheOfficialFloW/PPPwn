@@ -123,34 +123,34 @@
 #define dipsw_libSceDipsw_3 0x00A27C02 
 #endif
 
-// libkernel_sys.srpx
-#define _scePthreadAttrInit_offset 0
-#define _scePthreadAttrSetstacksize_offset 0
-#define _scePthreadCreate_offset 0
-#define _thr_initial_offset 0
+// libkernel_sys.srpx 
+#define _scePthreadAttrInit_offset 0x14010
+#define _scePthreadAttrSetstacksize_offset 0x14030
+#define _scePthreadCreate_offset 0x14450
+#define _thr_initial_offset 0x8E830
 
 //kern
-#define vm_map_protect_p 0
-#define ptrace_p 0
-#define ptrace_p2 0
-#define disable_aslr_p 0
-#define sceSblACMgrIsAllowedSystemLevelDebugging_p 0
-#define kemem_2 0
-#define kemem_1 0
-#define vm_map_lock_offset 0
-#define vm_map_insert_offset 0
-#define vm_map_unlock_offset 0
-#define malloc_offset 0
-#define free_offset 0
-#define vm_map_lock_read_offset 0
-#define vm_map_unlock_read_offset 0
-#define vm_map_lookup_entry_offset 0
-#define M_TEMP_offset 0 
-#define proc_rmem_offset 0
-#define vm_map_findspace_offset 0
-#define vm_map_delete_offset 0
-#define create_thread_offset 0
-#define all_proc_offset 0
+#define vm_map_protect_p 0x0035C8EC
+#define ptrace_p 0x00384285
+#define ptrace_p2 0x00384771
+#define disable_aslr_p 0x003B11A4
+#define sceSblACMgrIsAllowedSystemLevelDebugging_p 0x002A0670
+#define kemem_2 0x00245EE4
+#define kemem_1 0x00245EDC
+#define vm_map_lock_offset  0x00357760
+#define vm_map_insert_offset 0x00358AB0
+#define vm_map_unlock_offset  0x003577D0
+#define malloc_offset 0x001A4220
+#define free_offset 0x001A43E0
+#define vm_map_lock_read_offset 0x003578B0
+#define vm_map_unlock_read_offset 0x00357900
+#define vm_map_lookup_entry_offset 0x00357EF0
+#define M_TEMP_offset 0x015415B0
+#define proc_rmem_offset  0x003838A0
+#define vm_map_findspace_offset 0x0035A970
+#define vm_map_delete_offset 0x0035A3B0
+#define create_thread_offset 0x00295170
+#define all_proc_offset 0x022D0A98
 
 #else
 

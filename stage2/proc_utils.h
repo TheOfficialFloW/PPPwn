@@ -38,7 +38,6 @@ typedef struct {
 } OrbisNotificationRequest;
 typedef u_char vm_prot_t;	/* protection codes */
 
-struct sysent *sysents;
 
 static inline uint64_t rdmsr(u_int msr) {
   uint32_t low, high;

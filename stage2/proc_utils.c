@@ -19,7 +19,7 @@ int proc_get_vm_map(struct thread *td, uint8_t *kbase, struct proc *p, struct pr
     int (*printf)(const char *format, ...) = (void *)kdlsym(printf);
     
 
-    void* M_TEMP = (void*)(kbase + 0x015621E0);
+    void* M_TEMP = (void*)(kbase + M_TEMP_offset);
     vm_map_lock_read(map);
 
     int num = map->nentries;
@@ -27,8 +27,9 @@ int proc_get_vm_map(struct thread *td, uint8_t *kbase, struct proc *p, struct pr
         printf("num is 0\n");
         goto error;
     }
-
+printf("zvm_map_lookup_entry\n");
     r = vm_map_lookup_entry(map, NULL, &entry);
+    printf("done\n");
     if(r) {
         printf("vm_map_lookup_entry failed\n");
         goto error;
@@ -134,12 +135,15 @@ int proc_allocate(struct thread *td, uint8_t *kbase, struct proc *p, void **addr
                        vm_ooffset_t offset, vm_offset_t start, vm_offset_t end,
                        vm_prot_t prot, vm_prot_t max, int cow) =
       (void *)(kbase + vm_map_insert_offset);
+          uint64_t kaslr_offset = rdmsr(MSR_LSTAR) - kdlsym_addr_Xfast_syscall;
+    int (*printf)(const char *format, ...) = (void *)kdlsym(printf);
      
     int (*vm_map_findspace)(struct vm_map *map, uint64_t start, uint64_t length, uint64_t *addr) = (void *)(kbase + vm_map_findspace_offset);
 
     
     if (!address) {
         r = 1;
+        printf("address is NULL\n");
         goto error;
     }
 
@@ -149,12 +153,14 @@ int proc_allocate(struct thread *td, uint8_t *kbase, struct proc *p, void **addr
     vm_map_lock(map);
 
     r = vm_map_findspace(map, NULL, size, &addr);
+    printf("vm_map_findspace: %d, %p\n", r, addr);
     if (r) {
         vm_map_unlock(map);
         goto error;
     }
 
     r = vm_map_insert(map, NULL, NULL, addr, addr + size, VM_PROT_ALL, VM_PROT_ALL, 0);
+    printf("vm_map_insert: %d %p\n", r, addr);
 
     vm_map_unlock(map);
 
@@ -208,12 +214,16 @@ int proc_create_thread(struct thread *td, uint8_t *kbase, struct proc *p, uint64
     
     uint64_t stacksize = 0x80000;
 
+    printf("proc_create_thread starting .........\n");
+
     // allocate rpc ldr
     r = proc_allocate(td, kbase, p, &rpcldraddr, ldrsize);
     if (r) {
         printf("proc_allocate failed\n");
         goto error;
     }
+
+    printf("rpcldraddr: %p\n", rpcldraddr);
 
     // allocate stack
     r = proc_allocate(td, kbase, p, &stackaddr, stacksize);
@@ -222,15 +232,20 @@ int proc_create_thread(struct thread *td, uint8_t *kbase, struct proc *p, uint64
         goto error;
     }
 
+    printf("stackaddr: %p\n", stackaddr);
+
+
     // write loader
     r = proc_write_mem(td, kbase, p, rpcldraddr, sizeof(rpcldr), (void *)rpcldr, &n);
     if (r) {
         printf("proc_write_mem failed\n");
         goto error;//
     }
+    printf("rpcldr written\n");
 
     // donor thread
     struct thread *thr = TAILQ_FIRST(&p->p_threads);
+    printf("thr: %p\n", thr);
 
     // find libkernel base
     r = proc_get_vm_map(td, kbase, p, &entries, &num_entries);
