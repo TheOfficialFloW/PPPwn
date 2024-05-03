@@ -40,6 +40,16 @@ Install the requirements:
 sudo pip install -r requirements.txt
 ```
 
+<details>
+  <summary>Arch Linux (pacman)</summary>
+
+>```sh
+>sudo pacman -S python-scapy
+>```
+>If you get, `sudo: pacman: command not found`, skip. You are not using an arch based distro.
+
+</details>
+
 Compile the payloads:
 
 ```sh
