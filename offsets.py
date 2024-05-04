@@ -20,10 +20,10 @@ class OffsetsFirmware_850:
     # 0xffffffff823ce849 : mov cr0, rsi ; ud2 ; mov eax, 1 ; ret
     MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff823ce849
 
-    SECOND_GADGET_OFF = 0x3c
+    SECOND_GADGET_OFF = 0x3b
 
-    # 0xffffffff833188a7 : jmp qword ptr [rsi + 0x3c]
-    FIRST_GADGET = 0xffffffff833188a7
+    # 0xffffffff8237e09d : jmp qword ptr [rsi + 0x3b]
+    FIRST_GADGET = 0xffffffff8237e09d
 
     # 0xffffffff82c766e6 : push rbp ; jmp qword ptr [rsi]
     PUSH_RBP_JMP_QWORD_PTR_RSI = 0xffffffff82c766e6
