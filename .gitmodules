@@ -1,3 +1,0 @@
-[submodule "freebsd-headers"]
-	path = freebsd-headers
-	url = https://github.com/OpenOrbis/freebsd-headers
