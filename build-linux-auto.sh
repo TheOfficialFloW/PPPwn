@@ -12,7 +12,7 @@ OUT="Stages"
 # PARAM LOG ( "-d" "-1" )
 # 1: "-d": Enable log "": Disable log
 # 2: If 1=="-d" then if 2: "-1": log in 1 file or 1 log by Firmware
-# 2: don't touch it must be empty
+# 3: don't touch it must be empty
 declare LOG=( "-d" "-1" "" )
 
 # Function to Build stage1 and stage2 with the selected firmware version
