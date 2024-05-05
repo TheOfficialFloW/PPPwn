@@ -50,7 +50,7 @@ make -C stage2 FW=1100 clean && make -C stage2 FW=1100
 
 For other firmwares, e.g. FW 9.00, pass `FW=900`.
 
-Run the exploit (see `ifconfig` for the correct interface):
+DO NOT RUN the exploit just yet (don't press Enter yet) but prepare this command on your prompt (see `ifconfig` for the correct interface):
 
 ```sh
 sudo python3 pppwn.py --interface=enp0s3 --fw=1100
@@ -66,11 +66,15 @@ On your PS4:
 - Enter anything for `PPPoE User ID` and `PPPoE Password`
 - Choose `Automatic` for `DNS Settings` and `MTU Settings`
 - Choose `Do Not Use` for `Proxy Server`
-- Click `Test Internet Connection` to communicate with your computer
 
-If the exploit fails or the PS4 crashes, you can skip the internet setup and simply click on `Test Internet Connection`. If the `pppwn.py` script is stuck waiting for a request/response, abort it and run it again on your computer, and then click on `Test Internet Connection` on your PS4.
+- Now, simultaneously press the 'X' button on your controler on `Test Internet Connection` and 'Enter' on your keyboard (on the computer you have your Python script ready to run).
 
-If the exploit works, you should see an output similar to below, and you should see `Cannot connect to network.` followed by `PPPwned` printed on your PS4.
+ALWAYS wait for you console to show the message "Cannot connect to network: (NW-31274-7)" before trying this PPOE injection again.
+
+If the exploit fails or the PS4 crashes, you can skip the internet setup and simply click on `Test Internet Connection`. Kill the `pppwn.py` script and run it again on your computer, and then click on `Test Internet Connection` on your PS4: always simultaneously.
+
+
+If the exploit works, you should see an output similar to below, and you should see `Cannot connect to network.` followed by `PPPwned` printed on your PS4, or the other way around. 
 
 ### Example run
 
