@@ -67,7 +67,7 @@ On your PS4:
 - Choose `Automatic` for `DNS Settings` and `MTU Settings`
 - Choose `Do Not Use` for `Proxy Server`
 
-- Now, simultaneously press the 'X' button on your controler on `Test Internet Connection` and 'Enter' on your keyboard (on the computer you have your Python script ready to run).
+- Now, simultaneously press the 'X' button on your controller on `Test Internet Connection` and 'Enter' on your keyboard (on the computer you have your Python script ready to run).
 
 ALWAYS wait for you console to show the message "Cannot connect to network: (NW-31274-7)" before trying this PPOE injection again.
 
