@@ -5,7 +5,7 @@
 
 
 # FW 8.00 / 8.01 / 8.03
-class OffsetsFirmware_800_803:
+class OffsetsFirmware_800_801_803:
     PPPOE_SOFTC_LIST = 0xffffffff84422370
 
     KERNEL_MAP = 0xffffffff83d243e0
@@ -380,7 +380,7 @@ class OffsetsFirmware_903_904:
     JMP_R14 = 0xffffffff82b835b3
 
 # FW 9.50 / 9.51 / 9.60
-class OffsetsFirmware_950_960:
+class OffsetsFirmware_950_951_960:
     PPPOE_SOFTC_LIST = 0xffffffff8434c0a8
 
     KERNEL_MAP = 0xffffffff84347830
@@ -567,7 +567,7 @@ class OffsetsFirmware_1000_1001:
     JMP_R14 = 0xffffffff8280346f
 
 # FW 10.50 / 10.70 / 10.71
-class OffsetsFirmware_1050_1071:
+class OffsetsFirmware_1050_1070_1071:
     PPPOE_SOFTC_LIST = 0xffffffff844514b8
 
     KERNEL_MAP = 0xffffffff844a9250
