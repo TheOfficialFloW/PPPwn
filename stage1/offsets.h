@@ -31,7 +31,7 @@
 #define kdlsym_addr_ksock_create 0xFFFFFFFF82521DA0
 #define kdlsym_addr_ksock_close 0xFFFFFFFF82521E10
 #define kdlsym_addr_ksock_bind 0xFFFFFFFF82521E20
-#define kdlsym_addr_ksock_recv 0xFFFFFFFF825220E0
+#define kdlsym_addr_ksock_recv 0xFFFFFFFF82522180
 
 #define kdlsym_addr_uart_patch 0xFFFFFFFF83764910
 #define kdlsym_addr_veri_patch 0xFFFFFFFF82837394
