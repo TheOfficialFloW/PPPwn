@@ -11,7 +11,7 @@
 
 #if (FIRMWARE == 800 || FIRMWARE == 801 || FIRMWARE == 803) // FW 8.00 / 8.01 / 8.03
 
-#define kdlsym_addr_xfast_syscall 0x0xffffffff822001c0
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 
 #define kdlsym_addr_printf 0xffffffff82630ae0
 

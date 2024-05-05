@@ -11,7 +11,7 @@
 
 #if (FIRMWARE == 800 || FIRMWARE == 801 || FIRMWARE == 803) // FW 8.00 / 8.01 / 8.03
 
-#define kdlsym_addr_xfast_syscall 0xffffffff822001c0
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 
 #define kdlsym_addr_pppoe_softc_list 0xffffffff84422370
 
@@ -20,7 +20,7 @@
 
 #define kdlsym_addr_nd6_llinfo_timer 0xffffffff825a4880
 
-#define kdlsym_addr_xill 0xffffffff82516e00
+#define kdlsym_addr_Xill 0xffffffff82516e00
 #define kdlsym_addr_setidt 0xffffffff82249dd0
 
 #define kdlsym_addr_kernel_map 0xffffffff83d243e0
