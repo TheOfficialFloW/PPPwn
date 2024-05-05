@@ -18,8 +18,8 @@ class OffsetsFirmware_750_755:
     MEMCPY = 0xFFFFFFFF8248F800
 
     # 0xffffffffe19d9cf9 : mov cr0, rsi ; ud2 ; mov eax, 1 ; ret
-    MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffffe19d9cf9
-
+    MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xFFFFFFFF825A2589
+    
     SECOND_GADGET_OFF = 0x3b
 
     # 0xffffffff824095e7 : jmp qword ptr [rsi + 0x3b]
