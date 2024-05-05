@@ -22,7 +22,7 @@
 #define kdlsym_addr_Xill 0xFFFFFFFF823BC880
 #define kdlsym_addr_setidt 0xFFFFFFFF825D9440
 
-#define kdlsym_addr_kernel_map 0FFFFFFFF843405B8
+#define kdlsym_addr_kernel_map 0xFFFFFFFF843405B8
 #define kdlsym_addr_kmem_alloc 0xFFFFFFFF823753E0
 
 #define kdlsym_addr_kproc_create 0xFFFFFFFF8220D8F0
