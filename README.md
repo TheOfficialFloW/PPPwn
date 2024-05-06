@@ -166,5 +166,5 @@ If the exploit works, you should see an output similar to below, and you should 
 ## Notes for Mac Apple Silicon Users (arm64 / aarch64)
 The code will not compile on Apple Silicon and requires AMD64 architecture.
 There is a workaround using docker which will build the bin files required.
-Clone this repository to your mac system, then from the repo folder run `./build-macarm.sh`.This will build the binaries for PS4 FW 1100 and place the necessary files into the correct folders. To build the binaries for a different version, i.e. 900, run the command as such: `./build-macarm.sh 900`. Once built, copy this folder structure into the Linux VM and execute as instructed above.
+Clone this repository to your mac system, then from the repo folder run `./build-macarm.sh`. This will build the binaries for PS4 FW 1100 and place the necessary files into the correct folders. To build the binaries for a different version, i.e. 900, run the command as such: `./build-macarm.sh 900`. Once built, copy this folder structure into the Linux VM and execute as instructed above.
 This has been tested using VMware Fusion 13.5.1, with the VM Guest as Ubuntu 24.04, and the host machine is MacOS 14.4.1
