@@ -10,7 +10,7 @@
 
 #if (FIRMWARE == 750 || FIRMWARE == 751 || FIRMWARE == 755) // FW 7.50 / FW 7.51 / FW 7.55
 
-#define kdlsym_addr_xfast_syscall 0xffffffff822001c0
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 
 #define kdlsym_addr_printf 0xffffffff8246f740
 
