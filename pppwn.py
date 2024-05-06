@@ -820,8 +820,10 @@ def main():
     parser.add_argument('--interface', required=True)
     parser.add_argument('--fw',
                         choices=[
-                            '850', '900', '903', '904', '950', '960', '1000',
-                            '1001', '1050', '1070', '1071', '1100'
+                            '800', '801', '803', '850', '852',
+                            '900', '903', '904', '950', '951', '960',
+                            '1000', '1001', '1050', '1070', '1071',
+                            '1100'
                         ],
                         default='1100')
     parser.add_argument('--stage1', default='stage1/stage1.bin')
@@ -837,13 +839,15 @@ def main():
     with open(args.stage2, mode='rb') as f:
         stage2 = f.read()
 
-    if args.fw == '850':
-        offs = OffsetsFirmware_850()
+    if args.fw in ('800', '801', '803'):
+        offs = OffsetsFirmware_800_803()
+    if args.fw in ('850', '852'):
+        offs = OffsetsFirmware_850_852()
     elif args.fw == '900':
         offs = OffsetsFirmware_900()
     elif args.fw in ('903', '904'):
         offs = OffsetsFirmware_903_904()
-    elif args.fw in ('950', '960'):
+    elif args.fw in ('950', '951', '960'):
         offs = OffsetsFirmware_950_960()
     elif args.fw in ('1000', '1001'):
         offs = OffsetsFirmware_1000_1001()
