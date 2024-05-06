@@ -827,6 +827,7 @@ def main():
     parser.add_argument('--interface', required=True)
     parser.add_argument('--fw',
                         choices=[
+                            '750', '751', '755',
                             '800', '801', '803', '850', '852',
                             '900', '903', '904', '950', '951', '960',
                             '1000', '1001', '1050', '1070', '1071',
@@ -846,7 +847,9 @@ def main():
     with open(args.stage2, mode='rb') as f:
         stage2 = f.read()
 
-    if args.fw in ('800', '801', '803'):
+    if args.fw in ('750', '751', '755'):
+        offs = OffsetsFirmware_750_755()
+    elif args.fw in ('800', '801', '803'):
         offs = OffsetsFirmware_800_803()
     elif args.fw in ('850', '852'):
         offs = OffsetsFirmware_850_852()
