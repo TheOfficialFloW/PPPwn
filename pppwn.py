@@ -214,26 +214,11 @@ class Exploit():
         while True:
             pkt = self.s.recv()
             if pkt and pkt.haslayer(PPP_PAP_Request):
-                if pkt[PPP_PAP_Request].username_len != 0:
-                    username = pkt[PPP_PAP_Request].username.decode("ascii")
-                    print("PAP username:", username)
                 if pkt[PPP_PAP_Request].passwd_len != 0:
                     pwd = pkt[PPP_PAP_Request].password.decode("ascii")
-                    print("PAP password:", pwd)
-                    if pwd in ('750', '751', '755')\
-                        or pwd in ('800', '801', '803')\
-                        or pwd in ('850', '852')\
-                        or pwd == '900'\
-                        or pwd in ('903', '904')\
-                        or pwd in ('950', '951', '960')\
-                        or pwd in ('1000', '1001')\
-                        or pwd in ('1050', '1070', '1071')\
-                        or pwd == '1100':
-                        self.sys_ver = pwd
-                    else:
-                        print("[-] No valid System Software version specified on PS4/PS5.")
+                    self.sys_ver = pwd if not self.sys_ver else self.sys_ver
                 break
-        
+
         if self.sys_ver != None:
             if self.sys_ver in ('750', '751', '755'):
                 self.offs = OffsetsFirmware_750_755()
@@ -256,26 +241,26 @@ class Exploit():
             else:
                 self.sys_ver = None
                 print("[-] Unknown System Software version selected.")
-        
+
         if self.sys_ver == None:
             print("[*] Propagating PPPoE username/password error to PS4/PS5...")
-            
+
             print('[*] Sending PAP authentication NAK...')
             self.s.send(
                 Ether(
                     src=self.source_mac, dst=self.target_mac, type=ETHERTYPE_PPPOE)
                 / PPPoE(sessionid=self.SESSION_ID) /
                 PPP() / PPP_PAP_Response(code=3, id=pkt[PPP_PAP_Request].id))
-            
+
             print('[*] Sending LCP terminate request...')
             self.s.send(
                 Ether(
                     src=self.source_mac, dst=self.target_mac, type=ETHERTYPE_PPPOE)
                 / PPPoE(sessionid=self.SESSION_ID) / PPP() / PPP_LCP_Terminate())
-                
+
             print("[-] Exiting...")
             exit(1)
-        
+
         print("Selected System Software version:", self.sys_ver)
 
         print('[*] Sending PAP authentication ACK...')
