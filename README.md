@@ -55,7 +55,7 @@ For other firmwares, e.g. FW 9.00, pass `FW=900`.
 DO NOT RUN the exploit just yet (don't press Enter yet) but prepare this command on your prompt (see `ifconfig` for the correct interface):
 
 ```sh
-sudo python3 pppwn.py --interface=enp0s3 --fw=1100
+sudo python3 pppwn.py --interface=enp0s3 [--fw=1100]
 ```
 
 For other firmwares, e.g. FW 9.00, pass `--fw=900`.
@@ -65,13 +65,14 @@ On your PS4:
 - Go to `Settings` and then `Network`
 - Select `Set Up Internet connection` and choose `Use a LAN Cable`
 - Choose `Custom` setup and choose `PPPoE` for `IP Address Settings`
-- Enter anything for `PPPoE User ID` and `PPPoE Password`
+- Enter anything for `PPPoE User ID`
+- Enter PS4/PS5 System Software version (e.g 900 for 9.00) for `PPPoE Password`
 - Choose `Automatic` for `DNS Settings` and `MTU Settings`
 - Choose `Do Not Use` for `Proxy Server`
 
 - Now, simultaneously press the 'X' button on your controller on `Test Internet Connection` and 'Enter' on your keyboard (on the computer you have your Python script ready to run).
 
-ALWAYS wait for you console to show the message "Cannot connect to network: (NW-31274-7)" before trying this PPOE injection again.
+ALWAYS wait for you console to show the message "Cannot connect to network: (NW-31274-7)" before trying this PPPoE injection again.
 
 If the exploit fails or the PS4 crashes, you can skip the internet setup and simply click on `Test Internet Connection`. Kill the `pppwn.py` script and run it again on your computer, and then click on `Test Internet Connection` on your PS4: always simultaneously.
 
