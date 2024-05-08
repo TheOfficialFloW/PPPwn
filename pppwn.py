@@ -214,6 +214,8 @@ class Exploit():
         while True:
             pkt = self.s.recv()
             if pkt and pkt.haslayer(PPP_PAP_Request):
+                if pkt[PPP_PAP_Request].username_len != 0:
+                    username = pkt[PPP_PAP_Request].username.decode("ascii")
                 if pkt[PPP_PAP_Request].passwd_len != 0:
                     pwd = pkt[PPP_PAP_Request].password.decode("ascii")
                     self.sys_ver = pwd if not self.sys_ver else self.sys_ver
