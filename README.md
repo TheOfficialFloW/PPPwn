@@ -28,6 +28,7 @@ On your computer, install mobaxterm:
 https://mobaxterm.mobatek.net/download-home-edition.html
 
 ![image](https://github.com/andewq121/PPPwn_openwrt/assets/168224103/bd4e9443-e0fc-440b-bcbb-775a98b5a76a)
+
 session > SSH > enter router ip(I changed the router's IP so that there are no conflicts with the main routers in repeater mode)
 
 
