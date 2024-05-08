@@ -127,13 +127,19 @@ void stage2(void) {
   uint8_t nops[] = {0x90, 0x90, 0x90};
 
   *(uint16_t *)kdlsym(copyin_patch1) = 0x9090;
+#if FIRMWARE >= 550
   memcpy((void *)kdlsym(copyin_patch2), nops, sizeof(nops));
+#endif
 
   *(uint16_t *)kdlsym(copyout_patch1) = 0x9090;
+#if FIRMWARE >= 550
   memcpy((void *)kdlsym(copyout_patch2), nops, sizeof(nops));
+#endif
 
   *(uint16_t *)kdlsym(copyinstr_patch1) = 0x9090;
+#if FIRMWARE >= 550
   memcpy((void *)kdlsym(copyinstr_patch2), nops, sizeof(nops));
+#endif
   *(uint16_t *)kdlsym(copyinstr_patch3) = 0x9090;
 
   // Restore write protection

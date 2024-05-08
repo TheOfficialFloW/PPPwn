@@ -99,8 +99,10 @@ static void stage2_proc(void *arg) {
 void stage1(void) {
   uint64_t kaslr_offset = rdmsr(MSR_LSTAR) - kdlsym_addr_Xfast_syscall;
 
+#if FIRMWARE >= 650
   void (*setidt)(int idx, void *func, int typ, int dpl, int ist) =
       (void *)kdlsym(setidt);
+#endif
   int (*kproc_create)(void (*)(void *), void *, void **, int flags, int pages,
                       const char *, ...) = (void *)kdlsym(kproc_create);
 
@@ -111,14 +113,18 @@ void stage1(void) {
   // Enable UART
   *(uint8_t *)kdlsym(uart_patch) = 0;
 
+#if FIRMWARE >= 650
   // Disable veri
   *(uint16_t *)kdlsym(veri_patch) = 0x9090;
+#endif
 
   // Restore write protection
   load_cr0(cr0);
 
+#if FIRMWARE >= 650
   // Restore UD handler
   setidt(IDT_UD, (void *)kdlsym(Xill), SDT_SYSIGT, SEL_KPL, 0);
+#endif
 
   // Fix corruption done by nd6_ns_output
   uintptr_t pppoe_softc_list = (uintptr_t)kdlsym(pppoe_softc_list);
