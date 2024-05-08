@@ -31,15 +31,36 @@ https://mobaxterm.mobatek.net/download-home-edition.html
 
 session > SSH > enter router ip(I changed the router's IP so that there are no conflicts with the main routers in repeater mode)
 
+![image](https://github.com/andewq121/PPPwn_openwrt/assets/168224103/40c84d30-99f7-4d2b-b997-7c551dff8c5b)
+
+unpack my repository into a folder and move it to this folder
+
+![image](https://github.com/andewq121/PPPwn_openwrt/assets/168224103/285bd8bb-6b02-4d1a-a78b-e84085335200)
 
 ```sh
-git clone --recursive https://github.com/TheOfficialFloW/PPPwn
+cd PPPwn_openwrt-master/
+cd PPPwn_openwrt-master/
 ```
 
-Change the directory to the cloned repository:
+and run script 1st_step
 
 ```sh
-cd PPPwn
+sh 1st_step.sh
+```
+
+your router will reboot
+check if the flash drive is detected
+
+```sh
+df /overlay /
+```
+your output should look like this
+
+```sh
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/sda1              7760088     28120   7316276   0% /overlay
+overlayfs:/overlay     7760088     28120   7316276   0% /
+
 ```
 
 Install the requirements:
