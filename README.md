@@ -39,10 +39,9 @@ unpack my repository into a folder and move it to this folder
 
 ```sh
 cd PPPwn_openwrt-master/
-cd PPPwn_openwrt-master/
 ```
 
-and run script 1st_step
+and run script 1st_step.sh
 
 ```sh
 sh 1st_step.sh
@@ -63,28 +62,17 @@ overlayfs:/overlay     7760088     28120   7316276   0% /
 
 ```
 
-Install the requirements:
-
 ```sh
-sudo pip install -r requirements.txt
+cd PPPwn_openwrt-master/
 ```
 
-Compile the payloads:
+and run script 2ns_step.sh
 
 ```sh
-make -C stage1 FW=1100 clean && make -C stage1 FW=1100
-make -C stage2 FW=1100 clean && make -C stage2 FW=1100
+sh 2nd_step.sh
 ```
 
-For other firmwares, e.g. FW 9.00, pass `FW=900`.
-
-DO NOT RUN the exploit just yet (don't press Enter yet) but prepare this command on your prompt (see `ifconfig` for the correct interface):
-
-```sh
-sudo python3 pppwn.py --interface=enp0s3 --fw=1100
-```
-
-For other firmwares, e.g. FW 9.00, pass `--fw=900`.
+the script will ask for your version
 
 On your PS4:
 
