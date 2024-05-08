@@ -1,5 +1,4 @@
-pppwn for openwrt
-# PPPwn - PlayStation 4 PPPoE RCE
+# PPPwn - OpenwWrt for PlayStation 4 PPPoE RCE
 PPPwn is a kernel remote code execution exploit for PlayStation 4 up to FW 11.00. This is a proof-of-concept exploit for [CVE-2006-4304](https://hackerone.com/reports/2177925) that was reported responsibly to PlayStation.
 
 Supported versions are:
@@ -17,16 +16,19 @@ Supported versions are:
 The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to launch Mira or similar homebrew enablers, the `stage2.bin` payload needs to be adapted.
 
 ## Requirements
-- A computer with an Ethernet port
-  - USB adapter also works
-- Ethernet cable
-- Linux
-  - You can use VirtualBox to create a Linux VM with `Bridged Adapter` as network adapter to use the ethernet port in the VM.
-- Python3 and gcc installed
+- Router with installed openwrt
+- Usb flash for router memory
+- Some skills
 
 ## Usage
+I won't show you how to install openwrt, I'll give you a ready-made script
+my router is configured in repeater mode(see video on youtube)
 
-On your computer, clone the repository:
+On your computer, install mobaxterm:
+https://mobaxterm.mobatek.net/download-home-edition.html
+![image](https://github.com/andewq121/PPPwn_openwrt/assets/168224103/bd4e9443-e0fc-440b-bcbb-775a98b5a76a)
+session > SSH > enter router ip(I changed the router's IP so that there are no conflicts with the main routers in repeater mode)
+
 
 ```sh
 git clone --recursive https://github.com/TheOfficialFloW/PPPwn
