@@ -72,12 +72,13 @@ On your PS4:
 
 - Now, simultaneously press the 'X' button on your controller on `Test Internet Connection` and 'Enter' on your keyboard (on the computer you have your Python script ready to run).
 
-ALWAYS wait for you console to show the message "Cannot connect to network: (NW-31274-7)" before trying this PPPoE injection again.
+ALWAYS wait for your PS4 to show the message "Cannot connect to network. (NW-31274-7)" before trying this PPPoE injection again.
 
 If the exploit fails or the PS4 crashes, you can skip the internet setup and simply click on `Test Internet Connection`. Kill the `pppwn.py` script and run it again on your computer, and then click on `Test Internet Connection` on your PS4: always simultaneously.
 
+If your PS4 displays the error "The PPPoE user ID or password is not correct. (NW-31273-6)", then the PS4/PS5 System Software version specified as `PPPoE Password` is invalid.
 
-If the exploit works, you should see an output similar to below, and you should see `Cannot connect to network.` followed by `PPPwned` printed on your PS4, or the other way around. 
+If the exploit works, you should see a console output similar to below, and a `Cannot connect to network.` notification on your PS4, followed by a `PPPwned` notification, or the other way around. 
 
 ### Example run
 
@@ -98,6 +99,12 @@ If the exploit works, you should see an output similar to below, and you should 
 [*] Sending LCP configure ACK...
 [*] Sending LCP configure request...
 [*] Waiting for LCP configure ACK...
+[*] Waiting for PAP authentication request...
+[+] PAP username: me
+[+] PAP password: 1337
+[-] Unknown System Software version specified on PS4/PS5.
+[+] Selected System Software version: 1100
+[*] Sending PAP authentication ACK...
 [*] Waiting for IPCP configure request...
 [*] Sending IPCP configure NAK...
 [*] Waiting for IPCP configure request...
