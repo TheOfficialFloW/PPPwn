@@ -747,6 +747,10 @@ class Exploit():
 
         if not corrupted:
             print('[-] Scanning for corrupted object...failed. Please retry.')
+            self.s.send(
+                Ether(
+                    src=self.source_mac, dst=self.target_mac, type=ETHERTYPE_PPPOE)
+                / PPPoE(sessionid=self.SESSION_ID) / PPP() / PPP_LCP_Terminate())
             exit(1)
 
         print(
