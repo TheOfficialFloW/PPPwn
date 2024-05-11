@@ -8,7 +8,35 @@
 #ifndef __OFFSETS_H__
 #define __OFFSETS_H__
 
-#if (FIRMWARE == 750 || FIRMWARE == 751 || FIRMWARE == 755) // FW 7.50 / FW 7.51 / FW 7.55
+#if (FIRMWARE == 700 || FIRMWARE == 701 || FIRMWARE == 702) // FW 7.00 / FW 7.01 / FW 7.02
+
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
+
+#define kdlsym_addr_pppoe_softc_list 0xffffffff844ad838
+
+#define kdlsym_addr_cc_cpu 0xffffffff8432d310
+#define kdlsym_addr_callwheelsize 0xffffffff8432f310
+
+#define kdlsym_addr_nd6_llinfo_timer 0xffffffff82680fb0
+
+#define kdlsym_addr_Xill 0xffffffff824e86b0
+#define kdlsym_addr_setidt 0xffffffff82692400
+
+#define kdlsym_addr_kernel_map 0xffffffff843c8ee0
+#define kdlsym_addr_kmem_alloc 0xffffffff823170f0
+
+#define kdlsym_addr_kproc_create 0xffffffff822c4170
+#define kdlsym_addr_kproc_exit 0xffffffff822c43e0
+
+#define kdlsym_addr_ksock_create 0xffffffff82340610
+#define kdlsym_addr_ksock_close 0xffffffff82340680
+#define kdlsym_addr_ksock_bind 0xffffffff82340690
+#define kdlsym_addr_ksock_recv 0xffffffff823409f0
+
+#define kdlsym_addr_uart_patch 0xffffffff83c6eaa0
+#define kdlsym_addr_veri_patch 0xffffffff8283acce
+
+#elif (FIRMWARE == 750 || FIRMWARE == 751 || FIRMWARE == 755) // FW 7.50 / FW 7.51 / FW 7.55
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 

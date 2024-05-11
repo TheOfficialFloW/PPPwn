@@ -8,7 +8,30 @@
 #ifndef __OFFSETS_H__
 #define __OFFSETS_H__
 
-#if (FIRMWARE == 750 || FIRMWARE == 751 || FIRMWARE == 755) // FW 7.50 / FW 7.51 / FW 7.55
+#if (FIRMWARE == 700 || FIRMWARE == 701 || FIRMWARE == 702) // FW 7.00 / FW 7.01 / FW 7.02
+
+#define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
+
+#define kdlsym_addr_printf 0xffffffff822bc730
+
+#define kdlsym_addr_sysent 0xffffffff83325660
+
+#define kdlsym_addr_amd_syscall_patch1 0xffffffff82200490
+#define kdlsym_addr_amd_syscall_patch2 0xffffffff822004b5
+#define kdlsym_addr_amd_syscall_patch3 0xffffffff822004b9
+#define kdlsym_addr_amd_syscall_patch4 0xffffffff822004c2
+
+#define kdlsym_addr_copyin_patch1 0xffffffff8222f287
+#define kdlsym_addr_copyin_patch2 0xffffffff8222f293
+
+#define kdlsym_addr_copyout_patch1 0xffffffff8222f192
+#define kdlsym_addr_copyout_patch2 0xffffffff8222f19e
+
+#define kdlsym_addr_copyinstr_patch1 0xffffffff8222f733
+#define kdlsym_addr_copyinstr_patch2 0xffffffff8222f73f
+#define kdlsym_addr_copyinstr_patch3 0xffffffff8222f770
+
+#elif (FIRMWARE == 750 || FIRMWARE == 751 || FIRMWARE == 755) // FW 7.50 / FW 7.51 / FW 7.55
 
 #define kdlsym_addr_Xfast_syscall 0xffffffff822001c0
 
