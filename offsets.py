@@ -15,7 +15,7 @@ class OffsetsFirmware_700_702:
     KMEM_ALLOC_PATCH1 = 0xffffffff823171be
     KMEM_ALLOC_PATCH2 = 0xffffffff823171c6
 
-    MEMCPY = 0xffffffff8222ef80
+    MEMCPY = 0xffffffff8222f040
 
     # 0xffffffff82660609 : mov cr0, rsi ; ud2 ; mov eax, 1 ; ret
     MOV_CR0_RSI_UD2_MOV_EAX_1_RET = 0xffffffff823b7169
