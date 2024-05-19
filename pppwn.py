@@ -10,7 +10,7 @@ from scapy.all import *
 from scapy.layers.ppp import *
 from struct import pack, unpack
 from sys import exit
-from time import sleepe
+from time import sleep
 from offsets import *
 import time
 import traceback
