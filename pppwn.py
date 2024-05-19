@@ -10,8 +10,10 @@ from scapy.all import *
 from scapy.layers.ppp import *
 from struct import pack, unpack
 from sys import exit
-from time import sleep
+from time import sleepe
 from offsets import *
+import time
+import traceback
 
 # PPPoE constants
 
