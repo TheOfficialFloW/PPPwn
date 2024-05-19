@@ -762,12 +762,12 @@ class Exploit():
         start_time = time.time()
         timeout = 60  # Maximum wait time (e.g., 60 seconds)
 
-    while True:
+     while True:
          try:
         pkt = self.s.recv()
         if pkt and pkt.haslayer(ICMPv6NDOptSrcLLAddr) and pkt[ICMPv6NDOptSrcLLAddr].len > 1:
             break
-    except Exception as e:
+     except Exception as e:
         print(f'[-] Error receiving packet: {e}')
         traceback.print_exc()
         exit(1)
