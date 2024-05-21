@@ -768,9 +768,10 @@ class Exploit():
         while True:
                 try:
                         pkt = self.s.recv()
-                        print(f'[DEBUG] Packet received: {pkt.summary()}')  # Add this line to print a summary of the packet
-                        if pkt and pkt.haslayer(ICMPv6NDOptSrcLLAddr) and pkt[ICMPv6NDOptSrcLLAddr].len > 1:
-                                break
+                        if pkt:        # Check if the packet is not empty
+                                if pkt.haslayer(ICMPv6NDOptSrcLLAddr) and pkt[ICMPv6NDOptSrcLLAddr].len > 1:
+                                        print(f'[DEBUG] Packet received: {pkt.summary()}')
+                                        break
                 except Exception as e:
                         print(f'[-] Error receiving packet: {e}')
                         traceback.print_exc()
