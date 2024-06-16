@@ -44,6 +44,31 @@ Install the requirements:
 sudo pip install -r requirements.txt
 ```
 
+<details>
+  <summary>Alterative install instructions (optional)</summary>
+
+>Install using venv to create a virtual environment.
+>
+>```sh
+>python3 -m venv .venv
+>source ./.venv/bin/activate
+>pip install -r requirements.txt
+>```
+
+>Install python dependencies globally. (not recommended)
+>
+>Ubuntu
+>```sh
+>sudo apt-get install python3-scapy
+>```
+>Arch Linux
+>```sh
+>sudo pacman -S python-scapy
+>```
+>
+ >Note: If you get, `command not found`, you are using the wrong package manager.
+</details>
+
 Compile the payloads:
 
 ```sh
