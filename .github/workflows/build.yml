@@ -1,0 +1,53 @@
+name: Build Binaries and Create Release
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential gcc-multilib zip
+      
+      - name: Create dist directory
+        run: mkdir dist
+
+      - name: Set outputs
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Build firmware for each version
+        run: |
+          for FW_VERSION in 900 903 904 950 960 1000 1001 1050 1070 1071 1100; do
+            make FW=$FW_VERSION clean && make FW=$FW_VERSION all
+            make -C stage1 FW=$FW_VERSION clean && make -C stage1 FW=$FW_VERSION
+            make -C stage2 FW=$FW_VERSION clean && make -C stage2 FW=$FW_VERSION
+            zip -r "dist/stages-$FW_VERSION.zip" stage1/stage1.bin stage2/stage2.bin
+          done
+
+      - name: Archive prebuilt binaries
+        uses: actions/upload-artifact@v2
+        with:
+          name: prebuilt-binaries
+          path: dist/*.zip
+
+      - name: Create Release
+        uses: marvinpinto/action-automatic-releases@master
+        with:
+          title: "PPPwn ${{ steps.vars.outputs.sha_short }}"
+          automatic_release_tag: "PPPwn-${{ steps.vars.outputs.sha_short }}"
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          files: ./dist/*.zip
+          prerelease: false
